@@ -6,7 +6,7 @@ A library to simplify iOS programming in Swift.
 ## Installation
 Drop in the Sparrow folder to your Xcode project.
 
-![](./Img/installation.jpg)
+![](./Img/installation.png)
 
 ## In-App Purchase
 
@@ -32,7 +32,7 @@ Drop in the Sparrow folder to your Xcode project.
 
     showNotificationBannerWithTitle("Sparrow", messege: "Simplify iOS programming")
 
-![](./Img/banner.jpg)
+![](./Img/banner.png)
 
 ## Sound
 
@@ -47,7 +47,7 @@ or else
 
 ## Detailed Report
 
-![](./Img/log.jpg)
+![](./Img/log.png)
 
 ## License
 Sparrow is released under the MIT license. See LICENSE.md for details.
