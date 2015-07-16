@@ -1,4 +1,4 @@
-![](http://f.cl.ly/items/3n0o3d2j3m2b1G0v1a0B/sparrow.jpg)
+![](https://www.dropbox.com/s/dsgrkzwnj547j6s/sparrow.png?dl=0)
 
 ## Description
 A library to simplify iOS programming in Swift.
