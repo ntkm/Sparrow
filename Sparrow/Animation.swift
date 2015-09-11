@@ -20,41 +20,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import AudioToolbox
+import UIKit
 
-public class audioPlayer: NSObject {
-    var fileName : String?
-    var enabled : Bool = true
-    
-    override init() {}
-    
-    init(fileName file: String) {
-        self.fileName = file
-    }
-    
-    public func playSound(soundFile:String) {
-        if !enabled {
-            return
-        }
-        if let url = NSBundle.mainBundle().URLForResource(soundFile, withExtension: nil) {
-            var soundID : SystemSoundID = Internal.cache[url] ?? 0
-            if soundID == 0 {
-                AudioServicesCreateSystemSoundID(url, &soundID)
-                Internal.cache[url] = soundID
-            }
-            AudioServicesPlaySystemSound(soundID)
-        } else {
-            println("Could not find sound file name `\(soundFile)`")
-        }
-    }
-    
-    func play() {
-        if let filename = fileName {
-            self.playSound(filename)
-        }
-    }
-    
-    private struct Internal {
-        static var cache = [NSURL:SystemSoundID]()
-    }
+public func animate(duration: NSTimeInterval, animations: (() -> Void)!) {
+    UIView.animateWithDuration(
+        duration,
+        delay: 0,
+        usingSpringWithDamping: 0.7,
+        initialSpringVelocity: 0.7,
+        options: nil,
+        animations: {
+            animations()
+        }, completion: { finished in
+    })
+}
+
+public func animate(duration: NSTimeInterval, animations: (() -> Void)!, withComplection completion: ((Bool) -> Void)!) {
+    UIView.animateWithDuration(
+        duration,
+        delay: 0,
+        usingSpringWithDamping: 0.7,
+        initialSpringVelocity: 0.7,
+        options: nil,
+        animations: {
+            animations()
+        }, completion: { finished in
+            completion(true)
+    })
 }

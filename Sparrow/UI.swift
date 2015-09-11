@@ -20,41 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import AudioToolbox
+import UIKit
 
-public class audioPlayer: NSObject {
-    var fileName : String?
-    var enabled : Bool = true
-    
-    override init() {}
-    
-    init(fileName file: String) {
-        self.fileName = file
-    }
-    
-    public func playSound(soundFile:String) {
-        if !enabled {
-            return
-        }
-        if let url = NSBundle.mainBundle().URLForResource(soundFile, withExtension: nil) {
-            var soundID : SystemSoundID = Internal.cache[url] ?? 0
-            if soundID == 0 {
-                AudioServicesCreateSystemSoundID(url, &soundID)
-                Internal.cache[url] = soundID
-            }
-            AudioServicesPlaySystemSound(soundID)
-        } else {
-            println("Could not find sound file name `\(soundFile)`")
-        }
-    }
-    
-    func play() {
-        if let filename = fileName {
-            self.playSound(filename)
-        }
-    }
-    
-    private struct Internal {
-        static var cache = [NSURL:SystemSoundID]()
+extension UIView {
+    private func setViewAsCircle() {
+        var minSide = min(self.frame.width, self.frame.height)
+        self.layer.cornerRadius = minSide / 2
+        self.clipsToBounds = true
     }
 }
+

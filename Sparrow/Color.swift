@@ -23,7 +23,6 @@
 import UIKit
 
 class HSBColor {
-    
     var hue: CGFloat = 0
     var saturation: CGFloat = 0
     var brightness: CGFloat = 0
@@ -58,7 +57,7 @@ class HSBColor {
     }
 }
 
-func insertGradienInView(view: UIView, firstColor: UIColor, secondColor: UIColor) {
+func insertGradienInView(view: UIView, firstColor: UIColor, secondColor: UIColor) -> CAGradientLayer {
     let gradient: CAGradientLayer = CAGradientLayer()
     gradient.colors = [firstColor.CGColor, secondColor.CGColor]
     gradient.locations = [0.0 , 1.0]
@@ -66,4 +65,5 @@ func insertGradienInView(view: UIView, firstColor: UIColor, secondColor: UIColor
     gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
     gradient.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
     view.layer.insertSublayer(gradient, atIndex: 0)
+    return gradient
 }
