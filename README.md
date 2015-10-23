@@ -1,4 +1,4 @@
-![](/Img/sparrow.png)
+![](/Img/sparrow.jpg)
 
 ## Description
 A library to simplify iOS programming in Swift.
