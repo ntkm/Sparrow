@@ -1,4 +1,4 @@
-![](/Img/sparrow.png)
+![](/Img/sparrow.jpg)
 
 ## Description
 The library for simplify iOS programming in Swift. Сode written by sticking paradigms Steve McConnell in his book "Сode Сomplete". 
