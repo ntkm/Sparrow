@@ -22,11 +22,10 @@
 
 import AudioToolbox
 
-public class audioPlayer: NSObject {
+public class audioPlayer {
+    
     var fileName : String?
     var enabled : Bool = true
-    
-    override init() {}
     
     init(fileName file: String) {
         self.fileName = file

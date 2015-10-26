@@ -22,9 +22,7 @@
 
 import UIKit
 
-import UIKit
-
-func delay(delay:Double, closure:()->()) {
+public func delay(delay: Double, closure:()->()) {
     dispatch_after(
         dispatch_time(
             DISPATCH_TIME_NOW,

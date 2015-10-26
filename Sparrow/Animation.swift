@@ -28,7 +28,7 @@ public func animate(duration: NSTimeInterval, animations: (() -> Void)!) {
         delay: 0,
         usingSpringWithDamping: 0.7,
         initialSpringVelocity: 0.7,
-        options: nil,
+        options: [],
         animations: {
             animations()
         }, completion: { finished in
@@ -41,7 +41,7 @@ public func animate(duration: NSTimeInterval, animations: (() -> Void)!, withCom
         delay: 0,
         usingSpringWithDamping: 0.7,
         initialSpringVelocity: 0.7,
-        options: nil,
+        options: [],
         animations: {
             animations()
         }, completion: { finished in

@@ -1,18 +1,22 @@
-![](/Img/sparrow.jpg)
+![](/Img/sparrow.png)
 
 ## Description
-A library to simplify iOS programming in Swift.
+The library for simplify iOS programming in Swift. Сode written by sticking paradigms Steve McConnell in his book "Сode Сomplete". 
+
+I think that programmist at first think about the idea, and only then on the implementation. In library collected routine actions, which every programmist must realesed and realesed. Programmis shoud do product, but implementation simply action as "Inn-App" or "How play sound".
+
+Now added Game Center, In-App Purchase, AudioPlayer and other.
 
 ## Installation
-Drop in the Sparrow folder to your Xcode project.
+Drop in the Sparrow folder to your Xcode project. Add some lines of code and it work! 
 
-![](/Img/installation.png)
+![](/Img/installation.jpg)
 
 ## In-App Purchase
 
-    var purchase = Product(productID: "ID")
+    var purchase = Product(productID: "insert_in-app_id")
     purchase.funcWithPurchased = {
-        println("Bought")
+        println("bought")
     }
     buy(purchase)
 
@@ -24,15 +28,19 @@ Drop in the Sparrow folder to your Xcode project.
 
 # Achivment
 
-    var achivment = createAchivment("achivmentID")
-    achivment.setPercentCompleteTo(100)
-    sendAchivmentToServer([achivment])
+    let achivment = Achivment(ID: "insert_achivment_id")
+    achivment.setPercentCompleteTo(80)
+    achivment.sendAchivmentToServer()
+
+or else
+
+    sendAchivmentToServer([achivment_1, achivment_2])
 
 # Banner
 
     showNotificationBannerWithTitle("Sparrow", messege: "Simplify iOS programming")
 
-![](/Img/banner.png)
+![](/Img/banner GameCenter.jpg)
 
 ## Sound
 
@@ -47,7 +55,9 @@ or else
 
 ## Detailed Report
 
-![](/Img/log.png)
+During the execution of each complex action you will receive a detailed report to the console It is necessary to control: for example, you make a mistake in entering the ID of the internal purchases.
 
-## License
+![](/Img/log.jpg)
+
+## License and Contact
 Sparrow is released under the MIT license. See LICENSE.md for details.

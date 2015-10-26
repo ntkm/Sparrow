@@ -31,6 +31,8 @@ private let DeviceList = [
     /* iPhone 5S */       "iPhone6,1": "iPhone 5S", "iPhone6,2": "iPhone 5S",
     /* iPhone 6 */        "iPhone7,2": "iPhone 6",
     /* iPhone 6 Plus */   "iPhone7,1": "iPhone 6 Plus",
+    /* iPhone 6S */       "iPhone8,1": "iPhone6S",
+    /* iPhone 6S Plus */  "iPhone8,2": "iPhone 6S Plus",
     /* iPad 2 */          "iPad2,1": "iPad 2", "iPad2,2": "iPad 2", "iPad2,3": "iPad 2", "iPad2,4": "iPad 2",
     /* iPad 3 */          "iPad3,1": "iPad 3", "iPad3,2": "iPad 3", "iPad3,3": "iPad 3",
     /* iPad 4 */          "iPad3,4": "iPad 4", "iPad3,5": "iPad 4", "iPad3,6": "iPad 4",
@@ -47,21 +49,12 @@ public extension UIDevice {
         uname(&systemInfo)
         
         let machine = systemInfo.machine
-        let mirror = reflect(machine)                // Swift 1.2
-        // let mirror = Mirror(reflecting: machine)  // Swift 2.0
+        let mirror = Mirror(reflecting: machine)
         var identifier = ""
         
-        // Swift 1.2 - if you use Swift 2.0 comment this loop out.
-        for i in 0..<mirror.count {
-            if let value = mirror[i].1.value as? Int8 where value != 0 {
-                identifier.append(UnicodeScalar(UInt8(value)))
-            }
+        for child in mirror.children where child.value as? Int8 != 0 {
+            identifier.append(UnicodeScalar(UInt8(child.value as! Int8)))
         }
-        
-        // Swift 2.0 and later - if you use Swift 2.0 uncomment his loop
-        // for child in mirror.children where child.value as? Int8 != 0 {
-        //     identifier.append(UnicodeScalar(UInt8(child.value as! Int8)))
-        // }
         
         return DeviceList[identifier] ?? identifier
     }

@@ -22,41 +22,6 @@
 
 import UIKit
 
-class HSBColor {
-    var hue: CGFloat = 0
-    var saturation: CGFloat = 0
-    var brightness: CGFloat = 0
-    
-    init(hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
-        self.hue = hue
-        if (self.hue > 1) {
-            println("Error init HSB Color: overload hue. Set count < 1")
-        }
-        self.saturation = saturation
-        self.brightness = brightness
-    }
-    
-    func getUIColor() -> UIColor {
-        return UIColor(hue: self.hue, saturation: self.saturation, brightness: self.brightness, alpha: 1.0)
-    }
-    
-    func addModul(modul: HSBColor) {
-        self.addModul(hue: modul.hue, saturation: modul.saturation, brightness: modul.brightness)
-    }
-    
-    func addModul(#hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
-        self.hue = self.hue + hue
-        if (self.hue > 1) {
-            self.hue = self.hue - 1
-        }
-        if (self.hue < 0) {
-            self.hue = self.hue + 1
-        }
-        self.saturation = self.saturation + saturation
-        self.brightness = self.brightness + brightness
-    }
-}
-
 func insertGradienInView(view: UIView, firstColor: UIColor, secondColor: UIColor) -> CAGradientLayer {
     let gradient: CAGradientLayer = CAGradientLayer()
     gradient.colors = [firstColor.CGColor, secondColor.CGColor]

@@ -22,9 +22,10 @@
 
 import UIKit
 
+// shoul call in layoutSubviews()
 extension UIView {
-    private func setViewAsCircle() {
-        var minSide = min(self.frame.width, self.frame.height)
+    private func setFrameAsCircle() {
+        let minSide = min(self.frame.width, self.frame.height)
         self.layer.cornerRadius = minSide / 2
         self.clipsToBounds = true
     }

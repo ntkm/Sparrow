@@ -31,12 +31,13 @@ class Product {
     init(productID: String) {
         self.ID = productID
         self.funcWithPurchased = {
-            println("Product - Purchase Sucsess func not init")
+            print("Product - Purchase Sucsess func not init")
         }
         self.funcWithFailded = {
-            println("Product - Purchase Faild func not init")
+            print("Product - Purchase Faild func not init")
         }
     }
+    
 }
 
 private var buyingProduct: Product!
@@ -47,59 +48,49 @@ extension UIViewController: SKProductsRequestDelegate, SKPaymentTransactionObser
         if (SKPaymentQueue.canMakePayments()) {
             SKPaymentQueue.defaultQueue().addTransactionObserver(self)
             buyingProduct = product
-            var productID: NSSet = NSSet(object: product.ID);
-            var productsRequest: SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>)
-            productsRequest.delegate = self
-            productsRequest.start()
+            let productRequest = SKProductsRequest(productIdentifiers: [buyingProduct.ID])
+            productRequest.delegate = self
+            productRequest.start()
         } else {
-            println("In-App Purchases - Can't make purchases");
+            print("In-App Purchases - Can't make purchases");
         }
     }
-    
-    func restoringPurchases() {
-        SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
-    }
-    
+
     public func productsRequest (request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        var countProduct: Int = response.products.count
-        if (countProduct > 0) {
-            var validProduct: SKProduct = response.products[0] as! SKProduct
-            println("In-App Purchases - About payment");
-            println(validProduct.localizedTitle)
-            println(validProduct.localizedDescription)
-            println(validProduct.price)
-            println("In-App Purchases - Start buy product");
-            buyProduct(validProduct);
+        let countProduct = response.products.count
+        if (countProduct != 0) {
+            for validProduct in response.products {
+                print("In-App Purchases - About payment");
+                print("Title:" + String(validProduct.localizedTitle))
+                print("Description:" + String(validProduct.localizedDescription))
+                print("Price:" + String(validProduct.price))
+                print("In-App Purchases - Start buy product");
+                let payment = SKPayment(product: validProduct)
+                SKPaymentQueue.defaultQueue().addPayment(payment);
+            }
         }
     }
     
-    func buyProduct(product: SKProduct){
-        var payment = SKPayment(product: product)
-        SKPaymentQueue.defaultQueue().addPayment(payment);
-    }
-    
-    public func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
-        for transaction: AnyObject in transactions {
-            if let trans: SKPaymentTransaction = transaction as? SKPaymentTransaction {
-                switch trans.transactionState {
-                case .Purchased:
-                    println("In-App Purchases - Product Purchased");
-                    buyingProduct.funcWithPurchased()
-                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
-                    break;
-                case .Failed:
-                    println("In-App Purchases - Purchased Failed");
-                    buyingProduct.funcWithFailded()
-                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
-                    break;
-                case .Restored:
-                    println("In-App Purchases - Restored Restored");
-                    buyingProduct.funcWithPurchased()
-                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
-                    break;
-                default:
-                    break;
-                }
+    public func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .Purchased:
+                print("In-App Purchases - Product Purchased");
+                buyingProduct.funcWithPurchased()
+                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                break;
+            case .Failed:
+                print("In-App Purchases - Purchased Failed");
+                buyingProduct.funcWithFailded()
+                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                break;
+            case .Restored:
+                print("In-App Purchases - Restored Restored");
+                buyingProduct.funcWithPurchased()
+                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                break;
+            default:
+                break;
             }
         }
     }

@@ -27,12 +27,12 @@ extension UIViewController: GKGameCenterControllerDelegate {
     
     //initiate gameCenter
     func authorizateInGameCenter() {
-        var localPlayer = GKLocalPlayer.localPlayer()
+        let localPlayer = GKLocalPlayer.localPlayer()
         localPlayer.authenticateHandler = {(viewController, error) -> Void in
             if (viewController != nil) {
-                self.presentViewController(viewController, animated: true, completion: nil)
+                self.presentViewController(viewController!, animated: true, completion: nil)
             } else {
-                println("Game Center - State authenticate GameCenter: " + toString((GKLocalPlayer.localPlayer().authenticated)))
+                print("Game Center - State authenticate GameCenter: " + String((GKLocalPlayer.localPlayer().authenticated)))
             }
         }
     }
@@ -40,51 +40,64 @@ extension UIViewController: GKGameCenterControllerDelegate {
     //MARK: - leaderboard
     func saveHighscore(score:Int, to LiderboardID: String) {
         if GKLocalPlayer.localPlayer().authenticated {
-            var scoreReporter = GKScore(leaderboardIdentifier: LiderboardID)
+            let scoreReporter = GKScore(leaderboardIdentifier: LiderboardID)
             scoreReporter.value = Int64(score)
-            var scoreArray: [GKScore] = [scoreReporter]
-            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError!) -> Void in
+            let scoreArray: [GKScore] = [scoreReporter]
+            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError?) -> Void in
                 if error != nil {
-                    println("Game Center - Error save highscore")
+                    print(error!.localizedDescription)
                 }
             })
         }
     }
     
     func showLeaderboard(LiderboardID: String) {
-        var gcViewController: GKGameCenterViewController = GKGameCenterViewController()
+        let gcViewController: GKGameCenterViewController = GKGameCenterViewController()
         gcViewController.gameCenterDelegate = self
         gcViewController.viewState = GKGameCenterViewControllerState.Leaderboards
         gcViewController.leaderboardIdentifier = LiderboardID
         self.presentViewController(gcViewController, animated: true, completion: nil)
     }
     
-    public func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+    public func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
     }
     
     //MARK: - achivment
-    func createAchivment(ID: String) -> GKAchievement {
-        var achivment = GKAchievement(identifier: ID)
-        return achivment
-    }
-    
-    func setPercentCompleteTo(achievement: GKAchievement, percent: Double) {
-        achievement.percentComplete = percent
-    }
-    
-    func sendAchivmentToServer(achivments: [GKAchievement]) {
-        GKAchievement.reportAchievements(achivments, withCompletionHandler: nil)
+    func sendAchivmentToServer(achivments: [Achivment]) {
+        var gkAchivments = [GKAchievement]()
+        for achivment in achivments {
+            gkAchivments.append(achivment.gkAchivment)
+        }
+        GKAchievement.reportAchievements(gkAchivments, withCompletionHandler: nil)
     }
     
     func resetAchivment() {
-        println("Game Center - Reset Achivment")
+        print("Game Center - Reset Achivment")
         GKAchievement.resetAchievementsWithCompletionHandler(nil)
     }
     
     //MARK: - notification banner
     func showNotificationBannerWithTitle(title: String, messege: String) {
         GKNotificationBanner.showBannerWithTitle(title, message: messege, completionHandler: nil)
+    }
+}
+
+class Achivment {
+    let ID: String!
+    let gkAchivment: GKAchievement!
+    
+    init(ID: String) {
+        self.ID = ID
+        self.gkAchivment = GKAchievement(identifier: ID)
+    }
+    
+    func setPercentCompleteTo(percent: Double) {
+        gkAchivment.percentComplete = percent
+    }
+    
+    func sendAchivmentToServer() {
+        GKAchievement.reportAchievements([self.gkAchivment], withCompletionHandler: nil)
     }
 }
 
