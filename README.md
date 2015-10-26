@@ -62,7 +62,8 @@ During the execution of each complex action you will receive a detailed report t
 ## License and Contact
 Sparrow is released under the MIT license. See LICENSE.md for details.
 
-Contact: 
+Contact:
+ 
     ivanvorobei@icloud.com
     www.ivanorobei.by
     www.facebook.com/ivanvorobeisparrow
