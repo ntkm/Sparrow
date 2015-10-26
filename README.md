@@ -65,7 +65,7 @@ Sparrow is released under the MIT license. See LICENSE.md for details.
 Contact:
  
     ivanvorobei@icloud.com
-    www.ivanorobei.by
+    www.ivanvorobei.by
     www.facebook.com/ivanvorobeisparrow
     
 ![](/Img/feature.jpg)
