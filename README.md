@@ -36,7 +36,7 @@ or else
 
     sendAchivmentToServer([achivment_1, achivment_2])
 
-# Banner
+# Banner GC
 
     showNotificationBannerWithTitle("Sparrow", messege: "Simplify iOS programming")
 
@@ -44,12 +44,12 @@ or else
 
 ## Sound
 
-    var audio = audioPlayer(fileName: "sparrow.mp3")
-    audio.play()
+    var sparrowSound = AudioPlayer(fileName: "sparrow.mp3")
+    sparrowSound.play()
 
 or else
 
-    var audio = audioPlayer()
+    var audio = AudioPlayer()
     audio.playSound("sparrow.mp3")
     audio.playSound("colibri.wav")
 
@@ -61,3 +61,10 @@ During the execution of each complex action you will receive a detailed report t
 
 ## License and Contact
 Sparrow is released under the MIT license. See LICENSE.md for details.
+
+Contact: 
+    ivanvorobei@icloud.com
+    www.ivanorobei.by
+    www.facebook.com/ivanvorobeisparrow
+    
+![](/Img/feature.jpg)
