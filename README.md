@@ -22,9 +22,11 @@ Drop in the Sparrow folder to your Xcode project. Add some lines of code and it 
 
 ## Game Center
 
-    authorizateInGameCenter()
-    saveHighscore(30, toLiderboard: "LiderboardID")
-    showLeaderboard("LeaderboardID")
+    let gameCenter = GameCenterManager(rootViewController: self)
+
+    gameCenter.authorizateInGameCenter()
+    gameCenter.saveHighscore(30, toLiderboard: "LiderboardID")
+    gameCenter.showLeaderboard("LiderboardID")
 
 # Achivment
 
