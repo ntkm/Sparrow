@@ -14,19 +14,19 @@ Drop in the Sparrow folder to your Xcode project. Add some lines of code and it 
 
 ## In-App Purchase
 
-    var purchase = Product(productID: "insert_in-app_id")
+    let purchase = Product(productID: "insert_in-app_id")
     purchase.funcWithPurchased = {
-        println("bought")
+        print("bought")
     }
-    buy(purchase)
+    purchase.buy()
 
 ## Game Center
 
     let gameCenter = GameCenterManager(rootViewController: self)
 
     gameCenter.authorizateInGameCenter()
-    gameCenter.saveHighscore(30, toLiderboard: "LiderboardID")
-    gameCenter.showLeaderboard("LiderboardID")
+    gameCenter.saveHighscore(30, toLiderboard: "insert_liderboardID")
+    gameCenter.showLeaderboard("insert_liderboardID")
 
 # Achivment
 
