@@ -23,44 +23,54 @@
 import UIKit
 import GameKit
 
-extension UIViewController: GKGameCenterControllerDelegate {
+class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     
-    //initiate gameCenter
+    var rootViewController: UIViewController!
+    
+    init(rootViewController: UIViewController) {
+        super.init()
+        self.rootViewController = rootViewController
+    }
+    
+    //MARK: - authorizate
     func authorizateInGameCenter() {
         let localPlayer = GKLocalPlayer.localPlayer()
-        localPlayer.authenticateHandler = {(viewController, error) -> Void in
-            if (viewController != nil) {
-                self.presentViewController(viewController!, animated: true, completion: nil)
-            } else {
-                print("Game Center - State authenticate GameCenter: " + String((GKLocalPlayer.localPlayer().authenticated)))
+        localPlayer.authenticateHandler = {(viewController, errors) -> Void in
+            guard (viewController != nil) else {
+                print("Game Center - Faild authorizate in GameCenter")
+                print("State authenticate GameCenter: " + String((GKLocalPlayer.localPlayer().authenticated)))
+                print("Mistakes: " + String(errors!.localizedDescription))
+                return
             }
+            self.rootViewController.presentViewController(viewController!, animated: true, completion: nil)
         }
     }
     
     //MARK: - leaderboard
-    func saveHighscore(score:Int, to LiderboardID: String) {
-        if GKLocalPlayer.localPlayer().authenticated {
-            let scoreReporter = GKScore(leaderboardIdentifier: LiderboardID)
-            scoreReporter.value = Int64(score)
-            let scoreArray: [GKScore] = [scoreReporter]
-            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError?) -> Void in
-                if error != nil {
-                    print(error!.localizedDescription)
-                }
-            })
-        }
-    }
-    
     func showLeaderboard(LiderboardID: String) {
         let gcViewController: GKGameCenterViewController = GKGameCenterViewController()
         gcViewController.gameCenterDelegate = self
         gcViewController.viewState = GKGameCenterViewControllerState.Leaderboards
         gcViewController.leaderboardIdentifier = LiderboardID
-        self.presentViewController(gcViewController, animated: true, completion: nil)
+        self.rootViewController.presentViewController(gcViewController, animated: true, completion: nil)
     }
     
-    public func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
-        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+    func saveHighscore(score: Int, toLiderboard LiderboardID: String) {
+        guard GKLocalPlayer.localPlayer().authenticated else {
+            print("Game Center - Faild saved highscore. State authenticate GameCenter: " + String((GKLocalPlayer.localPlayer().authenticated)))
+            return
+        }
+        let scoreReporter = GKScore(leaderboardIdentifier: LiderboardID)
+        scoreReporter.value = Int64(score)
+        let scoreArray: [GKScore] = [scoreReporter]
+        GKScore.reportScores(scoreArray) { (errors) -> Void in
+            guard (errors != nil) else {
+                print("Game Center - Faild saved highscore to LiderboardID: " + String(LiderboardID))
+                print("Mistakes: " + String(errors!.localizedDescription))
+                return
+            }
+            print("Game Center - Sucsess saved highscore to LiderboardID: " + String(LiderboardID))
+        }
     }
     
     //MARK: - achivment
@@ -72,20 +82,31 @@ extension UIViewController: GKGameCenterControllerDelegate {
         GKAchievement.reportAchievements(gkAchivments, withCompletionHandler: nil)
     }
     
-    func resetAchivment() {
-        print("Game Center - Reset Achivment")
-        GKAchievement.resetAchievementsWithCompletionHandler(nil)
+    func resetAchivments() {
+        GKAchievement.resetAchievementsWithCompletionHandler {(errors) -> Void in
+            guard (errors != nil) else {
+                print("Game Center - Faild reset achivments")
+                print("Mistakes: " + String(errors!.localizedDescription))
+                return
+            }
+            print("Game Center - Reset Achivment")
+        }
     }
     
     //MARK: - notification banner
     func showNotificationBannerWithTitle(title: String, messege: String) {
         GKNotificationBanner.showBannerWithTitle(title, message: messege, completionHandler: nil)
     }
+    
+    internal func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
 
 class Achivment {
+    
     let ID: String!
-    let gkAchivment: GKAchievement!
+    private let gkAchivment: GKAchievement!
     
     init(ID: String) {
         self.ID = ID
@@ -93,12 +114,17 @@ class Achivment {
     }
     
     func setPercentCompleteTo(percent: Double) {
-        gkAchivment.percentComplete = percent
+        self.gkAchivment.percentComplete = percent
     }
     
     func sendAchivmentToServer() {
-        GKAchievement.reportAchievements([self.gkAchivment], withCompletionHandler: nil)
+        GKAchievement.reportAchievements([self.gkAchivment], withCompletionHandler: {(errors) -> Void in
+            guard (errors != nil) else {
+                print("Game Center - Faild send achivment to server")
+                print("Mistakes: " + String(errors!.localizedDescription))
+                return
+            }
+            print("Game Center - Sent achivment to server")
+        })
     }
 }
-
-
