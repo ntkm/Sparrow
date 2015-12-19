@@ -22,7 +22,7 @@
 
 import UIKit
 
-// shoul call in layoutSubviews()
+// shoud call in layoutSubviews()
 extension UIView {
     private func setFrameAsCircle() {
         let minSide = min(self.frame.width, self.frame.height)
