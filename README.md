@@ -57,7 +57,7 @@ or else
 
 ## Sparrow UI
     
-    Blur, animation and Views for your project. Adaptive and with clean code.
+Blur, animation and Views for your project. Adaptive and with clean code.
 
 ![](/Img/sparrow ui.jpg) 
 
