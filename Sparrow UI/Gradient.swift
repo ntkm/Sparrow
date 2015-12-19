@@ -22,13 +22,15 @@
 
 import UIKit
 
-func insertGradienInView(view: UIView, firstColor: UIColor, secondColor: UIColor) -> CAGradientLayer {
-    let gradient: CAGradientLayer = CAGradientLayer()
-    gradient.colors = [firstColor.CGColor, secondColor.CGColor]
-    gradient.locations = [0.0 , 1.0]
-    gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-    gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-    gradient.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
-    view.layer.insertSublayer(gradient, atIndex: 0)
-    return gradient
+extension UIView {
+    func insertGradienInView(firstColor: UIColor, secondColor: UIColor) -> CAGradientLayer {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.colors = [firstColor.CGColor, secondColor.CGColor]
+        gradient.locations = [0.0 , 1.0]
+        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.frame.size.width, height: self.frame.size.height)
+        self.layer.insertSublayer(gradient, atIndex: 0)
+        return gradient
+    }
 }
