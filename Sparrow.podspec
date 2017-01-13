@@ -10,4 +10,9 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.ios.deployment_target = '8.0'
   s.source_files = 'sparrow/**/*.swift'
+
+  s.subspec 'LaunchAnimation' do |launch_animation|
+    launch_animation.source_files = 'sparrow/launch/animation/**/*.swift'
+  end
+
 end
