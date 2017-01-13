@@ -25,7 +25,7 @@ public class SPGradientViewController: UIViewController {
     
     var gradient: CAGradientLayer?
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         self.commonInit()
     }
@@ -47,7 +47,7 @@ public class SPGradientViewController: UIViewController {
         self.view.layer.insertSublayer(self.gradient!, at: 0)
     }
     
-    override func viewWillLayoutSubviews() {
+    override public func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.gradient?.frame = self.view.bounds
     }

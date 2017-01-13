@@ -26,7 +26,7 @@ public class SPParallaxTableViewCell: UITableViewCell {
     var parallaxViews = [UIView]()
     var parallaxSize: CGFloat = 100
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }

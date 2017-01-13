@@ -27,7 +27,7 @@ public class SPRoundButton: SPRoundFrameButton {
         self.commonInit()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -46,7 +46,7 @@ public class SPRoundLineButton: SPRoundFrameButton {
         self.commonInit()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -63,9 +63,9 @@ public class SPRoundLineButton: SPRoundFrameButton {
     }
 }
 
-class SPRoundFrameButton: UIButton {
+public class SPRoundFrameButton: UIButton {
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         let minSide = min(self.frame.width, self.frame.height)
         self.layer.cornerRadius = minSide / 2

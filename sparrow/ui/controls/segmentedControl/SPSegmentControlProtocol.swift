@@ -21,7 +21,7 @@
 
 import UIKit
 
-public @objc protocol SPSegmentControlDelegate {
+@objc protocol SPSegmentControlDelegate {
     
     @objc optional func indicatorViewRelativPosition(position: CGFloat, onSegmentControl segmentControl: SPSegmentedControl)
 }

@@ -25,7 +25,7 @@ public class SPParallaxTableViewController: UITableViewController {
     
     private var cellHeight: CGFloat = 240
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
     }
 
@@ -34,15 +34,15 @@ public class SPParallaxTableViewController: UITableViewController {
         fatalError("need emplementation in subclass")
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         fatalError("need emplementation in subclass")
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.cellHeight
     }
     
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         tableView.visibleCells.forEach { cell in
             let parallaxCell = cell as! SPParallaxTableViewCell
             parallaxCell.parallaxOffset(self.tableView)

@@ -36,7 +36,7 @@ public class SPPageItemsScalingCollectionLayout: UICollectionViewFlowLayout {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -45,7 +45,7 @@ public class SPPageItemsScalingCollectionLayout: UICollectionViewFlowLayout {
         scrollDirection = .horizontal
     }
     
-    internal override func targetContentOffset( forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+    public override func targetContentOffset( forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         let rawPageValue = (self.collectionView!.contentOffset.x) / self.pageWidth
         let currentPage = (velocity.x > 0.0) ? floor(rawPageValue) : ceil(rawPageValue);
         let nextPage = (velocity.x > 0.0) ? ceil(rawPageValue) : floor(rawPageValue);
@@ -62,7 +62,7 @@ public class SPPageItemsScalingCollectionLayout: UICollectionViewFlowLayout {
         return proposedContentOffset;
     }
     
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override public func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let collectionView = self.collectionView,
             let superAttributes = super.layoutAttributesForElements(in: rect) else {
                 return super.layoutAttributesForElements(in: rect)
@@ -95,11 +95,11 @@ public class SPPageItemsScalingCollectionLayout: UICollectionViewFlowLayout {
         return newAttributesArray
     }
     
-    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+    override public func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
     
-    override func prepare() {
+    override func public prepare() {
         super.prepare()
         
         guard let collectionView = self.collectionView else {

@@ -21,7 +21,7 @@
 
 import Foundation
 
-public @objc protocol SPSegmentControlCellStyleDelegate {
+@objc protocol SPSegmentControlCellStyleDelegate {
     
     @objc optional func selectedState(segmentControlCell: SPSegmentedControlCell, forIndex index: Int)
     

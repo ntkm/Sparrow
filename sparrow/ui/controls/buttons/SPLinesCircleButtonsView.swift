@@ -32,7 +32,7 @@ public class SPLinesCircleButtonsView: UIView {
         self.addButtons(buttons)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.backgroundColor = UIColor.clear
     }
@@ -48,7 +48,7 @@ public class SPLinesCircleButtonsView: UIView {
         self.backgroundColor = UIColor.clear
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         let counts: CGFloat = CGFloat(self.items.count)
         var sideSize = self.frame.height

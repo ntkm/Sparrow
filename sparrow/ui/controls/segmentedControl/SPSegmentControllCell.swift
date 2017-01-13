@@ -50,7 +50,7 @@ public class SPSegmentedControlCell: UIView {
         self.commonInit()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -66,7 +66,7 @@ public class SPSegmentedControlCell: UIView {
         self.addSubview(self.imageView)
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         label.frame = CGRect.zero
         imageView.frame = CGRect.zero

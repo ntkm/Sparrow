@@ -37,7 +37,7 @@ public class SPGradientView: UIView {
         
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -60,7 +60,7 @@ public class SPGradientView: UIView {
         self.layer.insertSublayer(self.gradient!, at: 0)
     }
     
-    override func layoutSublayers(of layer: CALayer) {
+    override public func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
         self.gradient.frame = self.bounds
     }

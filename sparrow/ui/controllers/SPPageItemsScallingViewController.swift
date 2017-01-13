@@ -25,14 +25,14 @@ public class SPPageItemsScallingViewController: SPGradientViewController, UIColl
     
     var collectionView = SPPageItemsScalingCollectionView()
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.view.addSubview(self.collectionView)
     }
     
-    override func viewWillLayoutSubviews() {
+    override public func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.collectionView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height * 0.5)
         self.collectionView.center = self.view.center
@@ -40,11 +40,11 @@ public class SPPageItemsScallingViewController: SPGradientViewController, UIColl
     
     //MARK: - UICollectionViewDataSource
     //must ovveride in subclass
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func public collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         fatalError("need emplementation in subclass")
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func public collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         fatalError("need emplementation in subclass")
     }
     
