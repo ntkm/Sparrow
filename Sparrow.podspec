@@ -9,7 +9,11 @@ Pod::Spec.new do |s|
   s.framework = 'UIKit'
   s.requires_arc = true
   s.ios.deployment_target = '8.0'
-  s.source_files = 'sparrow/**/*.swift'
+  s.default_subspec = 'Core'
+
+  s.subspec 'Core' do |core|
+    core.source_files = 'sparrow/**/*.swift'
+  end
 
   s.subspec 'LaunchAnimation' do |launch_animation|
     launch_animation.source_files = 'sparrow/launch/animation/**/*.swift'

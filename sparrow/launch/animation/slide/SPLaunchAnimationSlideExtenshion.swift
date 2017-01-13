@@ -61,10 +61,13 @@ public extension SPLaunchAnimation {
             view.transform = CGAffineTransform(translationX: screenBounds.width * self.paralaxTranslationXCoef, y: 0)
         }
         
-        SPAnimationSpring.animate(
-            self.animateDuration,
+        UIView.animate(
+            withDuration: self.animateDuration,
+            delay: self.delay,
+            usingSpringWithDamping: 1.0,
+            initialSpringVelocity: 0.0,
+            options: [.curveEaseInOut],
             animations: {
-                
                 window.rootViewController?.view.frame.origin = CGPoint.zero
                 for view in rootViewControllerSubviews {
                     view.transform = CGAffineTransform.identity
@@ -73,16 +76,10 @@ public extension SPLaunchAnimation {
                 for view in launchScreenViewSubviews {
                     view.transform = CGAffineTransform.init(translationX: -screenBounds.width * self.paralaxTranslationXCoef, y: 0)
                 }
-                
-                
-        }, delay: self.delay,
-           spring: 1.0,
-           velocity: 0.0,
-           options: [.curveEaseInOut],
-           withComplection: {
+        }, completion: {
             finished in
-                complection()
-                launchScreenView.removeFromSuperview()
+            complection()
+            launchScreenView.removeFromSuperview()
         })
     }
 }
