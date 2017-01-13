@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2016 Ivan Vorobei (hello@ivanvorobei.by)
+// Copyright © 2017 Ivan Vorobei (hello@ivanvorobei.by)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 
 import UIKit
 
-class SPAnimationUpward {
+public class SPAnimationUpward {
     
     fileprivate static let durationListAnimation: TimeInterval = 0.45
     fileprivate static let coefLenthForTransition: CGFloat = 2.8

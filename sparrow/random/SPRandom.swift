@@ -1,6 +1,5 @@
 // The MIT License (MIT)
-//
-// Copyright (c) 2015 Ivan Vorobei (ivanvorobei@icloud.com)
+// Copyright © 2017 Ivan Vorobei (hello@ivanvorobei.by)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +61,7 @@ public extension CGFloat {
     }
 }
 
-extension Collection {
+public extension Collection {
     /// Return a copy of `self` with its elements shuffled
     func shuffle() -> [Generator.Element] {
         var list = Array(self)
@@ -71,7 +70,7 @@ extension Collection {
     }
 }
 
-extension MutableCollection where Index == Int {
+public extension MutableCollection where Index == Int {
     /// Shuffle the elements of `self` in-place.
     mutating func shuffleInPlace() {
         // empty and single-element collections don't shuffle

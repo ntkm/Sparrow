@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2016 Ivan Vorobei (hello@ivanvorobei.by)
+// Copyright © 2017 Ivan Vorobei (hello@ivanvorobei.by)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,9 +21,9 @@
 
 import UIKit
 
-extension UIImage {
+public extension UIImage {
     
-    class func resizeImage(_ image: UIImage, newWidth: CGFloat) -> UIImage {
+    public class func resizeImage(_ image: UIImage, newWidth: CGFloat) -> UIImage {
         let scale = newWidth / image.size.width
         let newHeight = image.size.height * scale
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
@@ -33,7 +33,7 @@ extension UIImage {
         return newImage!
     }
     
-    class func drawFromView(view: UIView) -> UIImage {
+    public class func drawFromView(view: UIView) -> UIImage {
         UIGraphicsBeginImageContext(view.frame.size)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()

@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2016 Ivan Vorobei (hello@ivanvorobei.by)
+// Copyright © 2017 Ivan Vorobei (hello@ivanvorobei.by)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 import UIKit
 import AVFoundation
 
-struct SPAudioPlayer {
+public struct SPAudioPlayer {
     
     fileprivate var player: AVAudioPlayer
     var volume: Float {
