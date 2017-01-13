@@ -40,11 +40,11 @@ public class SPPageItemsScallingViewController: SPGradientViewController, UIColl
     
     //MARK: - UICollectionViewDataSource
     //must ovveride in subclass
-    func public collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         fatalError("need emplementation in subclass")
     }
     
-    func public collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         fatalError("need emplementation in subclass")
     }
     

@@ -99,7 +99,7 @@ public class SPPageItemsScalingCollectionLayout: UICollectionViewFlowLayout {
         return true
     }
     
-    override func public prepare() {
+    override public func prepare() {
         super.prepare()
         
         guard let collectionView = self.collectionView else {
