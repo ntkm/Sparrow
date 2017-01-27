@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'Sparrow'
   s.version = '1.0.1'
-  s.license = 'MIT'
+  s.license = { :type => "MIT", :file => "LICENSE" }
   s.summary = 'A library for simplify iOS programming'
   s.homepage = 'https://github.com/IvanVorobei/Sparrow'
   s.authors = { 'Ivan Vorobei' => 'hello@ivanvorobei.by' }
