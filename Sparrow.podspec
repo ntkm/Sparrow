@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Sparrow'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.license = 'MIT'
   s.summary = 'A library for simplify iOS programming'
   s.homepage = 'https://github.com/IvanVorobei/Sparrow'
@@ -10,7 +10,6 @@ Pod::Spec.new do |s|
   s.framework = 'UIKit'
   s.requires_arc = true
   s.ios.deployment_target = '8.0'
-  s.xcconfig = { 'SWIFT_VERSION' => '3.0' }
   s.default_subspec = 'Core'
 
   s.subspec 'Core' do |core|
