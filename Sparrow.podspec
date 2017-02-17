@@ -14,24 +14,20 @@ Pod::Spec.new do |s|
 
   s.subspec 'Core' do |core|
     core.name = 'Core'
-    core.module_name = 'Core'
     core.source_files = 'sparrow/**/*.swift'
   end
 
   s.subspec 'LaunchAnimation' do |launch_animation|
     launch_animation.name = 'LaunchAnimation'
-    launch_animation.module_name = 'LaunchAnimation'
     launch_animation.source_files = 'sparrow/launch/animation/**/*.swift'
   end
 
   s.subspec 'Modules' do |modules|
     modules.name = 'Modules'
-    modules.module_name = 'Modules'
     modules.source_files = 'sparrow/**/*.swift'
 
     s.subspec 'RequestPermission' do |request_permission|
       request_permission.name = 'RequestPermission'
-      request_permission.module_name = 'RequestPermission'
       request_permission.source_files = 'sparrow/**/*.swift'
     end
 
