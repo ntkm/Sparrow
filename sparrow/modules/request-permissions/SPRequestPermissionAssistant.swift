@@ -21,7 +21,7 @@
 
 import UIKit
 
-class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface, SPRequestPermissionAssistantDelegate {
+public class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface, SPRequestPermissionAssistantDelegate {
     
     private var permissions: [SPRequestPermissionType]
     
