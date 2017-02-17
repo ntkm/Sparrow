@@ -20,8 +20,4 @@ Pod::Spec.new do |s|
     launch_animation.source_files = 'sparrow/launch/animation/**/*.swift'
   end
 
-  s.subspec 'Modules/RequsetPermission' do |ModulesRequsetPermission|
-    core.source_files = 'sparrow/**/*.swift'
-  end
-
 end
