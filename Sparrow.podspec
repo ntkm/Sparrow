@@ -25,6 +25,12 @@ Pod::Spec.new do |s|
   s.subspec 'Modules' do |modules|
     modules.name = 'Modules'
     modules.source_files = 'sparrow/**/*.swift'
+
+    s.subspec 'RequestPermission' do |request_permission|
+      request_permission.name = 'RequestPermission'
+      request_permission.source_files = 'sparrow/**/*.swift'
+    end
+    
   end
 
 end
