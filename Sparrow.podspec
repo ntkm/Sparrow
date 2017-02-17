@@ -22,9 +22,9 @@ Pod::Spec.new do |s|
     launch_animation.source_files = 'sparrow/launch/animation/**/*.swift'
   end
 
-  s.subspec 'Modules' do |Modules|
-    Modules.name = 'Modules'
-    core.source_files = 'sparrow/**/*.swift'
+  s.subspec 'Modules' do |modules|
+    modules.name = 'Modules'
+    modules.source_files = 'sparrow/**/*.swift'
   end
 
 end
