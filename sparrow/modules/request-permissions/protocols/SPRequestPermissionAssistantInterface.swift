@@ -21,9 +21,9 @@
 
 import UIKit
 
-protocol SPRequestPermissionAssistantInterface {
+public protocol SPRequestPermissionAssistantInterface {
     
-    var eventsDelegate: SPRequestPermissionEventsDelegate? {get set}
+    public var eventsDelegate: SPRequestPermissionEventsDelegate? {get set}
     
     func present(on viewController: UIViewController)
     

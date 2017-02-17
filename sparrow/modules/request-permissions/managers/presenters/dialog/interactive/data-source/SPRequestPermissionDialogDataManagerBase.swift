@@ -23,7 +23,7 @@ import UIKit
 
 public class SPRequestPermissionDialogInteractiveDataSource: SPRequestPermissionDialogInteractiveDataSourceInterface {
     
-    func createControlForPermission(_ permission: SPRequestPermissionType) -> SPRequestPermissionTwiceControlInterface {
+    public func createControlForPermission(_ permission: SPRequestPermissionType) -> SPRequestPermissionTwiceControlInterface {
 
         var normalIconBezierPath = UIBezierPath()
         var title = String()
@@ -55,7 +55,7 @@ public class SPRequestPermissionDialogInteractiveDataSource: SPRequestPermission
         )
     }
     
-    func headerBackgroundView() -> UIView {
+    public func headerBackgroundView() -> UIView {
         let patternView = SPRequestPermissionData.views.patternView()
         let gradientView = SPGradientWithPictureView.init()
         gradientView.setGradient(
@@ -68,31 +68,31 @@ public class SPRequestPermissionDialogInteractiveDataSource: SPRequestPermission
         return gradientView
     }
     
-    func headerTitle() -> String {
+    public func headerTitle() -> String {
         return SPRequestPermissionData.texts.title()
     }
     
-    func headerSubtitle() -> String {
+    public func headerSubtitle() -> String {
         return SPRequestPermissionData.texts.subtitile()
     }
     
-    func topAdviceTitle() -> String {
+    public func topAdviceTitle() -> String {
         return SPRequestPermissionData.texts.advice()
     }
     
-    func bottomAdviceTitle() -> String {
+    public func bottomAdviceTitle() -> String {
         return SPRequestPermissionData.texts.advice_additional()
     }
     
-    func underDialogAdviceTitle() -> String {
+    public func underDialogAdviceTitle() -> String {
         return SPRequestPermissionData.texts.swipe_for_hide()
     }
     
-    func mainColor() -> UIColor {
+    public func mainColor() -> UIColor {
         return UIColor.init(hex: "#27AEE8")
     }
     
-    func secondColor() -> UIColor {
+    public func secondColor() -> UIColor {
         return UIColor.white
     }
 }

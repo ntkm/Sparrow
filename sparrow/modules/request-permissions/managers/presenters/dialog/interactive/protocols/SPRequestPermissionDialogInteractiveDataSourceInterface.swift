@@ -21,7 +21,7 @@
 
 import UIKit
 
-protocol SPRequestPermissionDialogInteractiveDataSourceInterface {
+public protocol SPRequestPermissionDialogInteractiveDataSourceInterface {
     
     func createControlForPermission(_ permission: SPRequestPermissionType) -> SPRequestPermissionTwiceControlInterface
     
