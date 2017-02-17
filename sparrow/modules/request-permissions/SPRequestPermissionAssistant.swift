@@ -80,7 +80,7 @@ public class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface
             
             public struct interactive {
                 
-                static func `init`(with permissions: [SPRequestPermissionType], dataSourceForController dataSource: SPRequestPermissionDialogInteractiveDataSourceInterface = SPRequestPermissionDialogInteractiveDataSource()) -> SPRequestPermissionAssistantInterface {
+                static func create(with permissions: [SPRequestPermissionType], dataSourceForController dataSource: SPRequestPermissionDialogInteractiveDataSourceInterface = SPRequestPermissionDialogInteractiveDataSource()) -> SPRequestPermissionAssistantInterface {
                     let permissionManager = SPPermissionsManagers.base()
                     let presenterManager = SPRequestPermissionPresenters.dialog.interactive.create(dataSource: dataSource)
                     let assistant = SPRequestPermissionAssistant.init(
@@ -94,7 +94,7 @@ public class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface
         }
         
         public struct native {
-            static func `init`(with permissions: [SPRequestPermissionType]) -> SPRequestPermissionAssistantInterface {
+            static func create(with permissions: [SPRequestPermissionType]) -> SPRequestPermissionAssistantInterface {
                 let permissionManager = SPPermissionsManagers.base()
                 let presenterManager = SPRequestPermissionPresenters.native.create()
                 let assistant = SPRequestPermissionAssistant.init(
