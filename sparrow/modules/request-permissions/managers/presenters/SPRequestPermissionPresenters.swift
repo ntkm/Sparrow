@@ -19,30 +19,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import UIKit
+import Foundation
 
-public extension UILabel {
+struct SPRequestPermissionPresenters {
     
-    func setShadowOffsetForLetters(blurRadius: CGFloat = 0, widthOffset: Double = 0, heightOffset: Double = 0, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffset,
-            height: heightOffset
-        )
-        self.layer.shadowOpacity = opacity
+    struct dialog {
+        
+        struct interactive {
+            
+            static func create(dataSource: SPRequestPermissionDialogInteractiveDataSourceInterface) -> SPRequestPermissionPresenterInterface {
+                let dialogView = SPRequestPermissionDialogInteractiveView.init()
+                let viewController = SPRequestPermissionDialogInteractiveViewController(dialogView: dialogView)
+                let presenter = SPRequestPermissionDialogInteractivePresenter.init(
+                    viewController: viewController,
+                    dataSource: dataSource
+                )
+                return presenter
+            }
+        }
     }
     
-    func setShadowOffsetFactorForLetters(blurRadius: CGFloat = 0, widthOffsetFactor: Double = 0, heightOffsetFactor: Double = 0.03, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffsetFactor * Double(self.frame.width),
-            height: heightOffsetFactor * Double(self.frame.height)
-        )
-        self.layer.shadowOpacity = opacity
+    struct native {
+        
+        static func create() -> SPRequestPermissionPresenterInterface {
+            let presenter = SPRequestPermissionNativePresenter()
+            return presenter
+        }
     }
     
-    func setCenteringAlignment() {
-        self.textAlignment = .center
-        self.baselineAdjustment = .alignCenters
-    }
+    struct banner {}
 }

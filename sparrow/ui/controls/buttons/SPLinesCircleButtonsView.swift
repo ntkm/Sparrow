@@ -70,7 +70,5 @@ public class SPLinesCircleButtonsView: UIView {
             )
             xItemPosition = xItemPosition + sideSize + space
         }
-        
     }
-
 }

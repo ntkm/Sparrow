@@ -21,28 +21,27 @@
 
 import UIKit
 
-public extension UILabel {
+extension UIBezierPath {
     
-    func setShadowOffsetForLetters(blurRadius: CGFloat = 0, widthOffset: Double = 0, heightOffset: Double = 0, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffset,
-            height: heightOffset
-        )
-        self.layer.shadowOpacity = opacity
+    func resizeTo(width: CGFloat) {
+        let currentWidth = self.bounds.width
+        let relativeFactor = width / currentWidth
+        self.apply(CGAffineTransform(scaleX: relativeFactor, y: relativeFactor))
     }
     
-    func setShadowOffsetFactorForLetters(blurRadius: CGFloat = 0, widthOffsetFactor: Double = 0, heightOffsetFactor: Double = 0.03, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffsetFactor * Double(self.frame.width),
-            height: heightOffsetFactor * Double(self.frame.height)
-        )
-        self.layer.shadowOpacity = opacity
-    }
-    
-    func setCenteringAlignment() {
-        self.textAlignment = .center
-        self.baselineAdjustment = .alignCenters
+    func convertToImage(fill: Bool, stroke: Bool, color: UIColor = .black) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: self.bounds.width, height: self.bounds.height), false, 0.0)
+        let context = UIGraphicsGetCurrentContext()
+        context!.setStrokeColor(color.cgColor)
+        context!.setFillColor(color.cgColor)
+        if stroke {
+            self.stroke()
+        }
+        if fill {
+           self.fill()
+        }
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
     }
 }

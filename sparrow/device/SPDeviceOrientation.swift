@@ -21,28 +21,23 @@
 
 import UIKit
 
-public extension UILabel {
+struct SPDeviceOrientation {
     
-    func setShadowOffsetForLetters(blurRadius: CGFloat = 0, widthOffset: Double = 0, heightOffset: Double = 0, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffset,
-            height: heightOffset
-        )
-        self.layer.shadowOpacity = opacity
-    }
-    
-    func setShadowOffsetFactorForLetters(blurRadius: CGFloat = 0, widthOffsetFactor: Double = 0, heightOffsetFactor: Double = 0.03, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffsetFactor * Double(self.frame.width),
-            height: heightOffsetFactor * Double(self.frame.height)
-        )
-        self.layer.shadowOpacity = opacity
-    }
-    
-    func setCenteringAlignment() {
-        self.textAlignment = .center
-        self.baselineAdjustment = .alignCenters
+    static func isPortraitOrienation() -> Bool {
+        var isPortraitOrientation = true
+        if UIDevice.current.orientation.isValidInterfaceOrientation {
+            if UIDevice.current.orientation.isPortrait {
+                isPortraitOrientation = true
+            } else {
+                isPortraitOrientation = false
+            }
+        } else {
+            if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
+                isPortraitOrientation = true
+            } else {
+                isPortraitOrientation = false
+            }
+        }
+        return isPortraitOrientation
     }
 }

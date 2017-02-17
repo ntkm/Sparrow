@@ -30,11 +30,16 @@ public class SPGradientView: UIView {
         commonInit()
     }
     
-    init(frame: CGRect, fromColor: UIColor, toColor: UIColor) {
+    init(from fromColor: UIColor, toColor: UIColor) {
+        super.init(frame: CGRect.zero)
+        self.commonInit()
+        self.setGradient(from: fromColor, to: toColor)
+    }
+    
+    init(frame: CGRect, from fromColor: UIColor, to toColor: UIColor) {
         super.init(frame: frame)
         self.commonInit()
-        self.setGradient(fromColor, toColor: toColor)
-        
+        self.setGradient(from: fromColor, to: toColor)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -47,21 +52,50 @@ public class SPGradientView: UIView {
         self.layer.insertSublayer(self.gradient, at: 0)
     }
     
-    func setGradient(_ fromColor: UIColor,
-                     toColor: UIColor,
+    func setGradient(from fromColor: UIColor,
+                     to toColor: UIColor,
                      startPoint: CGPoint = CGPoint(x: 0.0, y: 0.0),
                      endPoint: CGPoint = CGPoint(x: 1.0, y: 1.0)) {
+        self.gradient.removeFromSuperlayer()
         self.gradient = CAGradientLayer()
         self.gradient!.colors = [fromColor.cgColor, toColor.cgColor]
         self.gradient!.locations = [0.0, 1.0]
         self.gradient!.startPoint = startPoint
+        
         self.gradient!.endPoint = endPoint
         self.gradient!.frame = CGRect(x: 0.0, y: 0.0, width: self.frame.size.width, height: self.frame.size.height)
         self.layer.insertSublayer(self.gradient!, at: 0)
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
     override public func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
         self.gradient.frame = self.bounds
+    }
+}
+
+
+class SPGradientWithPictureView: SPGradientView {
+    
+    var pictureView: UIView? {
+        willSet {
+            if self.pictureView != nil {
+                if self.subviews.contains(self.pictureView!) {
+                    self.pictureView?.removeFromSuperview()
+                }
+            }
+        }
+        didSet {
+            if self.pictureView != nil {
+                self.addSubview(pictureView!)
+            }
+        }
+    }
+    
+    override func layoutSubviews() {
+        self.pictureView?.frame = self.bounds
     }
 }

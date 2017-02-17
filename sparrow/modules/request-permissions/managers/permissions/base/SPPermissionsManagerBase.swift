@@ -19,30 +19,44 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import UIKit
+import Foundation
 
-public extension UILabel {
+enum SPRequestPermissionType {
+    case Camera
+    case PhotoLibrary
+    case Notification
+}
+
+class SPPermissionsManagerBase: SPPermissionManagerInterface {
     
-    func setShadowOffsetForLetters(blurRadius: CGFloat = 0, widthOffset: Double = 0, heightOffset: Double = 0, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffset,
-            height: heightOffset
-        )
-        self.layer.shadowOpacity = opacity
+    func isAuthorizedPermission(_ permission: SPRequestPermissionType) -> Bool {
+        let manager = self.getManagerForPermission(permission)
+        return manager.isAuthorized()
     }
     
-    func setShadowOffsetFactorForLetters(blurRadius: CGFloat = 0, widthOffsetFactor: Double = 0, heightOffsetFactor: Double = 0.03, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffsetFactor * Double(self.frame.width),
-            height: heightOffsetFactor * Double(self.frame.height)
-        )
-        self.layer.shadowOpacity = opacity
+    func requestPermission(_ permission: SPRequestPermissionType, withComlectionHandler complectionHandler: @escaping ()->()) {
+        let manager = self.getManagerForPermission(permission)
+        manager.request(withComlectionHandler: {
+            complectionHandler()
+        })
     }
-    
-    func setCenteringAlignment() {
-        self.textAlignment = .center
-        self.baselineAdjustment = .alignCenters
+
+    private func getManagerForPermission(_ permission: SPRequestPermissionType) -> SPPermissionInterface {
+        switch permission {
+        case .Camera:
+            return SPCameraPermission()
+        case .PhotoLibrary:
+            return SPPhotoLibraryPermission()
+        case .Notification:
+            return SPNotificationPermission()
+        }
     }
 }
+
+protocol SPPermissionInterface {
+    
+    func isAuthorized() -> Bool
+    
+    func request(withComlectionHandler complectionHandler: @escaping ()->()?)
+}
+

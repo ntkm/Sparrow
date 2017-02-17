@@ -21,28 +21,29 @@
 
 import UIKit
 
-public extension UILabel {
+extension SPRequestPermissionData {
     
-    func setShadowOffsetForLetters(blurRadius: CGFloat = 0, widthOffset: Double = 0, heightOffset: Double = 0, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffset,
-            height: heightOffset
-        )
-        self.layer.shadowOpacity = opacity
-    }
-    
-    func setShadowOffsetFactorForLetters(blurRadius: CGFloat = 0, widthOffsetFactor: Double = 0, heightOffsetFactor: Double = 0.03, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffsetFactor * Double(self.frame.width),
-            height: heightOffsetFactor * Double(self.frame.height)
-        )
-        self.layer.shadowOpacity = opacity
-    }
-    
-    func setCenteringAlignment() {
-        self.textAlignment = .center
-        self.baselineAdjustment = .alignCenters
+    struct colors {
+        
+        static func mainColor() -> UIColor {
+            return UIColor.init(hex: "#27AEE8")
+        }
+        
+        static func secondColor() -> UIColor {
+            return UIColor.white
+        }
+        
+        struct gradient {
+            
+            struct dark {
+                static func lightColor() -> UIColor {
+                    return UIColor.init(hex: "#171C1E")
+                }
+                
+                static func darkColor() -> UIColor {
+                    return UIColor.init(hex: "#000000")
+                }
+            }
+        }
     }
 }

@@ -109,7 +109,7 @@ public struct SPConstraintsAssistent {
             ])
     }
     
-    static func setCenteringConstraint(_ subView: UIView, superView: UIView) {
+    static func setXCenteringConstraint(_ subView: UIView, superView: UIView) -> NSLayoutConstraint {
         subView.translatesAutoresizingMaskIntoConstraints = false;
         
         let centerXConstraint = NSLayoutConstraint(
@@ -120,7 +120,12 @@ public struct SPConstraintsAssistent {
             attribute: .centerX,
             multiplier: 1, constant: 0
         )
-        
+        superView.addConstraints([centerXConstraint])
+        return centerXConstraint
+    }
+    
+    static func setYCenteringConstraint(_ subView: UIView, superView: UIView) -> NSLayoutConstraint {
+        subView.translatesAutoresizingMaskIntoConstraints = false;
         let centerYConstraint = NSLayoutConstraint(
             item: subView,
             attribute: .centerY,
@@ -129,8 +134,22 @@ public struct SPConstraintsAssistent {
             attribute: .centerY,
             multiplier: 1, constant: 0
         )
-        
-        superView.addConstraints([centerXConstraint, centerYConstraint])
+        superView.addConstraints([centerYConstraint])
+        return centerYConstraint
+    }
+    
+    static func setMaxSide(_ side: NSLayoutAttribute, on view: UIView, value: CGFloat) -> NSLayoutConstraint {
+        let constraint = NSLayoutConstraint(
+            item: view,
+            attribute: side,
+            relatedBy: .lessThanOrEqual,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 1, constant: value
+        )
+        view.addConstraints([constraint])
+        return constraint
+
     }
     
     static func setWidth(width: CGFloat, andHeight height: CGFloat, toView view: UIView) {
@@ -153,6 +172,32 @@ public struct SPConstraintsAssistent {
             constant: height
         )
         view.addConstraints([widthConstraint, heightConstraint])
+    }
+    
+    static func attachView(_ view: UIView, to superView: UIView, side: NSLayoutAttribute) -> NSLayoutConstraint {
+        let constraint = NSLayoutConstraint.init(
+            item: view,
+            attribute: side,
+            relatedBy: NSLayoutRelation.equal,
+            toItem: superView,
+            attribute: side,
+            multiplier: 1,
+            constant: 0
+        )
+        return constraint
+    }
+    
+    static func equalSide(_ view: UIView, superView: UIView, side: NSLayoutAttribute, factor: CGFloat = 1) -> NSLayoutConstraint {
+        let constraint = NSLayoutConstraint(
+            item: view,
+            attribute: side,
+            relatedBy: .equal,
+            toItem: superView,
+            attribute: side,
+            multiplier: factor,
+            constant: 0
+        )
+        return constraint
     }
 }
 

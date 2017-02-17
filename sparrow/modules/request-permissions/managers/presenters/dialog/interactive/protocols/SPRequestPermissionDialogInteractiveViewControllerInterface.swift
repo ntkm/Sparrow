@@ -21,28 +21,21 @@
 
 import UIKit
 
-public extension UILabel {
+protocol SPRequestPermissionDialogInteractiveViewControllerInterface {
     
-    func setShadowOffsetForLetters(blurRadius: CGFloat = 0, widthOffset: Double = 0, heightOffset: Double = 0, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffset,
-            height: heightOffset
-        )
-        self.layer.shadowOpacity = opacity
-    }
+    var presenterDelegate: SPRequestPermissionDialogInteractivePresenterDelegate? {get set}
     
-    func setShadowOffsetFactorForLetters(blurRadius: CGFloat = 0, widthOffsetFactor: Double = 0, heightOffsetFactor: Double = 0.03, opacity: Float = 0.4) {
-        self.layer.shadowRadius = blurRadius
-        self.layer.shadowOffset = CGSize(
-            width: widthOffsetFactor * Double(self.frame.width),
-            height: heightOffsetFactor * Double(self.frame.height)
-        )
-        self.layer.shadowOpacity = opacity
-    }
+    func present(on viewController: UIViewController)
     
-    func setCenteringAlignment() {
-        self.textAlignment = .center
-        self.baselineAdjustment = .alignCenters
-    }
+    func hide()
+    
+    func addControl(_ control: SPRequestPermissionTwiceControlInterface)
+    
+    //MARK: Data
+    func setHeaderBackgroundView(_ view: UIView)
+    func setHeaderTitle(_ title: String)
+    func setHeaderSubtitle(_ title: String)
+    func setTopTitle(_ title: String)
+    func setBottomTitle(_ title: String)
+    func setUnderDialogTitle(_ title: String)
 }

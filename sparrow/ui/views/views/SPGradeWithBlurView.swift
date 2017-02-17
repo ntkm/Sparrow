@@ -21,36 +21,44 @@
 
 import UIKit
 
-public class SPBlurView: UIVisualEffectView {
+class SPGradeWithBlurView: UIView {
     
-    private let blurEffect: UIBlurEffect
-    open var blurRadius: CGFloat {
-        return blurEffect.value(forKeyPath: "blurRadius") as! CGFloat
+    private var gradeView: UIView = UIView()
+    private var blurView: SPBlurView = SPBlurView()
+    
+    init(gradeColor: UIColor = UIColor.black, gradeAlphaFactor: CGFloat = 0.1, blurRadius: CGFloat = 3) {
+        super.init(frame: CGRect.zero)
+        self.layer.masksToBounds = true
+        self.addSubview(gradeView)
+        self.addSubview(blurView)
+        self.setGradeColor(gradeColor)
+        self.setGradeAlpha(gradeAlphaFactor, blurRaius: blurRadius)
     }
     
-    public convenience init() {
-        self.init(withRadius: 0)
-    }
-    
-    public init(withRadius radius: CGFloat) {
-        let customBlurClass: AnyObject.Type = NSClassFromString("_UICustomBlurEffect")!
-        let customBlurObject: NSObject.Type = customBlurClass as! NSObject.Type
-        self.blurEffect = customBlurObject.init() as! UIBlurEffect
-        self.blurEffect.setValue(1.0, forKeyPath: "scale")
-        self.blurEffect.setValue(radius, forKeyPath: "blurRadius")
-        super.init(effect: radius == 0 ? nil : self.blurEffect)
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    open func setBlurRadius(_ radius: CGFloat) {
-        guard radius != blurRadius else {
-            return
-        }
-        blurEffect.setValue(radius, forKeyPath: "blurRadius")
-        self.effect = blurEffect
+    func setGradeColor(_ color: UIColor) {
+        self.gradeView.backgroundColor = UIColor.black
+    }
+    
+    func setGradeAlpha(_ alpha: CGFloat) {
+        self.gradeView.alpha = alpha
+    }
+    
+    func setBlurRadius(_ radius: CGFloat) {
+        self.blurView.setBlurRadius(radius)
+    }
+    
+    func setGradeAlpha(_ alpha: CGFloat, blurRaius: CGFloat) {
+        self.setGradeAlpha(alpha)
+        self.setBlurRadius(blurRaius)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.gradeView.frame = self.bounds
+        self.blurView.frame = self.bounds
     }
 }
-
