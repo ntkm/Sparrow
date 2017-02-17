@@ -43,7 +43,7 @@ public class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface
         self.presenterManager.present(on: viewController)
     }
     
-    func requestPersmisson(_ permission: SPRequestPermissionType, with complectionHandler: @escaping ()->()) {
+    public func requestPersmisson(_ permission: SPRequestPermissionType, with complectionHandler: @escaping ()->()) {
         self.permissionManager.requestPermission(permission, withComlectionHandler: {
             [unowned self] in
             self.eventsDelegate?.didSelectedPermission(permission: permission)
@@ -56,11 +56,11 @@ public class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface
         })
     }
     
-    func isAllowPermission(_ permission: SPRequestPermissionType) -> Bool {
+    public func isAllowPermission(_ permission: SPRequestPermissionType) -> Bool {
         return self.permissionManager.isAuthorizedPermission(permission)
     }
     
-    func isAllowPermissions() -> Bool {
+    public func isAllowPermissions() -> Bool {
         for permission in self.permissions {
             guard self.permissionManager.isAuthorizedPermission(permission) else {
                 return false
@@ -69,7 +69,7 @@ public class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface
         return true
     }
     
-    internal func didHide() {
+    public func didHide() {
         self.eventsDelegate?.didHide()
     }
 }

@@ -21,13 +21,13 @@
 
 import UIKit
 
-extension SPRequestPermissionAssistant {
+public extension SPRequestPermissionAssistant {
     
-    struct modules {
+    public struct modules {
         
-        struct dialog {
+        public struct dialog {
             
-            struct interactive {
+            public struct interactive {
                 
                 static func `init`(with permissions: [SPRequestPermissionType], dataSourceForController dataSource: SPRequestPermissionDialogInteractiveDataSourceInterface = SPRequestPermissionDialogInteractiveDataSource()) -> SPRequestPermissionAssistantInterface {
                     let permissionManager = SPPermissionsManagers.base()
@@ -42,7 +42,7 @@ extension SPRequestPermissionAssistant {
             }
         }
         
-        struct native {
+        public struct native {
             static func `init`(with permissions: [SPRequestPermissionType]) -> SPRequestPermissionAssistantInterface {
                 let permissionManager = SPPermissionsManagers.base()
                 let presenterManager = SPRequestPermissionPresenters.native.create()
