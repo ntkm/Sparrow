@@ -13,11 +13,18 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Core'
 
   s.subspec 'Core' do |core|
+    core.name = 'Core'
     core.source_files = 'sparrow/**/*.swift'
   end
 
   s.subspec 'LaunchAnimation' do |launch_animation|
+    launch_animation.name = 'LaunchAnimation'
     launch_animation.source_files = 'sparrow/launch/animation/**/*.swift'
+  end
+
+  s.subspec 'Modules' do |Modules|
+    Modules.name = 'Modules'
+    core.source_files = 'sparrow/**/*.swift'
   end
 
 end
