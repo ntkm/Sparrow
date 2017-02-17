@@ -72,4 +72,38 @@ public class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface
     public func didHide() {
         self.eventsDelegate?.didHide()
     }
+    
+    //MARK: - Modules
+    public struct modules {
+        
+        public struct dialog {
+            
+            public struct interactive {
+                
+                static func `init`(with permissions: [SPRequestPermissionType], dataSourceForController dataSource: SPRequestPermissionDialogInteractiveDataSourceInterface = SPRequestPermissionDialogInteractiveDataSource()) -> SPRequestPermissionAssistantInterface {
+                    let permissionManager = SPPermissionsManagers.base()
+                    let presenterManager = SPRequestPermissionPresenters.dialog.interactive.create(dataSource: dataSource)
+                    let assistant = SPRequestPermissionAssistant.init(
+                        with: permissions,
+                        permissionManager: permissionManager,
+                        presenterManager: presenterManager
+                    )
+                    return assistant
+                }
+            }
+        }
+        
+        public struct native {
+            static func `init`(with permissions: [SPRequestPermissionType]) -> SPRequestPermissionAssistantInterface {
+                let permissionManager = SPPermissionsManagers.base()
+                let presenterManager = SPRequestPermissionPresenters.native.create()
+                let assistant = SPRequestPermissionAssistant.init(
+                    with: permissions,
+                    permissionManager: permissionManager,
+                    presenterManager: presenterManager
+                )
+                return assistant
+            }
+        }
+    }
 }
