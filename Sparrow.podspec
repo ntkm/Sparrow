@@ -15,7 +15,6 @@ Pod::Spec.new do |s|
   s.subspec 'Core' do |core|
     core.name = 'Core'
     core.source_files = 'sparrow/**/*.swift'
-    core.resources = "sparrow/**/*.lproj", "sparrow/**/*.xib"
   end
 
   s.subspec 'LaunchAnimation' do |launch_animation|
@@ -23,10 +22,15 @@ Pod::Spec.new do |s|
     launch_animation.source_files = 'sparrow/launch/animation/**/*.swift'
   end
 
-  s.subspec 'RequestPermission' do |request_permission|
-    request_permission.name = 'RequestPermission'
+  s.subspec 'Modules' do |modules|
+    request_permission.name = 'Modules'
     request_permission.source_files = 'sparrow/**/*.swift'
-    request_permission.resources = "sparrow/**/*.lproj", "sparrow/**/*.xib"
+
+    modules.subspec 'RequestPermission' do |request_permission|
+      request_permission.name = 'RequestPermission'
+      request_permission.source_files = 'sparrow/**/*.swift'
+    end
+
   end
 
 end

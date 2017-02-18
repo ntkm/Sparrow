@@ -23,36 +23,37 @@ import UIKit
 
 public class SPRequestPermissionDialogInteractiveDataSource: SPRequestPermissionDialogInteractiveDataSourceInterface {
     
-    public func createControlForPermission(_ permission: SPRequestPermissionType) -> SPRequestPermissionTwiceControlInterface {
-
-        var normalIconBezierPath = UIBezierPath()
-        var title = String()
-        
+    public func iconForNormalPermissionControl(_ permission: SPRequestPermissionType) -> UIImage {
+        var iconBezierPath = UIBezierPath()
+        let requestWidth: CGFloat = 100
         switch permission {
         case .Camera:
-            normalIconBezierPath = SPBezierPathFigure.icons.camera(width: 100)
+            iconBezierPath = SPBezierPathFigure.icons.camera(width: requestWidth)
+        case .PhotoLibrary:
+            iconBezierPath = SPBezierPathFigure.icons.photo_library(width: requestWidth)
+        case .Notification:
+            iconBezierPath = SPBezierPathFigure.icons.notification(width: requestWidth)
+        }
+        return iconBezierPath.convertToImage(fill: true, stroke: false, color: UIColor.black)
+    }
+    
+    public func iconForAllowedPermissionControl(_ permission: SPRequestPermissionType) -> UIImage {
+        let requestWidth: CGFloat = 100
+        let checkedBezierPath  = SPBezierPathFigure.icons.checked(width: requestWidth)
+        return checkedBezierPath.convertToImage(fill: true, stroke: false, color: UIColor.black)
+    }
+    
+    public func titleForPermissionControl(_ permission: SPRequestPermissionType) -> String {
+        var title = String()
+        switch permission {
+        case .Camera:
             title = SPRequestPermissionData.texts.enable_camera()
         case .PhotoLibrary:
-            normalIconBezierPath = SPBezierPathFigure.icons.photo_library(width: 100)
             title = SPRequestPermissionData.texts.enable_photoLibrary()
         case .Notification:
-            normalIconBezierPath = SPBezierPathFigure.icons.notification(width: 100)
             title = SPRequestPermissionData.texts.enable_notification()
         }
-        
-        let normalImage = normalIconBezierPath.convertToImage(fill: true, stroke: false, color: UIColor.black)
-
-        let checkedBezierPath  = SPBezierPathFigure.icons.checked(width: 100)
-        let checkedImage = checkedBezierPath.convertToImage(fill: true, stroke: false, color: UIColor.black)
-        
-        return SPRequestPermissionTwiceControl(
-            permissionType: permission,
-            title: title,
-            normalIconImage: normalImage ,
-            selectedIconImage: checkedImage,
-            normalColor: self.secondColor(),
-            selectedColor: self.mainColor()
-        )
+        return title
     }
     
     public func headerBackgroundView() -> UIView {
