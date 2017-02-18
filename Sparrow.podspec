@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 
     modules.subspec 'RequestPermission' do |request_permission|
       request_permission.name = 'RequestPermission'
-      request_permission.source_files = 'sparrow/**/*.swift'
+      request_permission.dependency 'Sparrow/Core'
     end
 
   end
