@@ -23,7 +23,7 @@ import UIKit
 
 extension SPPatternView {
     
-    func setRhombusPattern() {
+    open func setRhombusPattern() {
         self.pattern = SPBezierPathFigure.patterns.rhombus()
     }
 }
