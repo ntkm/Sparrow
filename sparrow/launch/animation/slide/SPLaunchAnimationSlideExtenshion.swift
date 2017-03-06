@@ -30,8 +30,8 @@ public extension SPLaunchAnimation {
     
     static func slideWithParalax(
         launchScreenStoryboardName: String = "LaunchScreen",
-        disabelParalaxForFirstViewOnLaunchScreenView: Bool = true,
-        disabelParalaxForFirstViewOnRootViewController: Bool = true,
+        disableParalaxForFirstViewOnLaunchScreenView: Bool = true,
+        disableParalaxForFirstViewOnRootViewController: Bool = true,
         withComplection complection: @escaping ()->() = {},
         onWindow window: UIWindow) {
         
@@ -43,7 +43,7 @@ public extension SPLaunchAnimation {
         
         var rootViewControllerSubviews = (window.rootViewController?.view.subviews)!
 
-        if (disabelParalaxForFirstViewOnRootViewController) {
+        if (disableParalaxForFirstViewOnRootViewController) {
             rootViewControllerSubviews.removeFirst()
         }
         
@@ -53,7 +53,7 @@ public extension SPLaunchAnimation {
         
         var launchScreenViewSubviews = launchScreenView.subviews
 
-        if (disabelParalaxForFirstViewOnLaunchScreenView) {
+        if (disableParalaxForFirstViewOnLaunchScreenView) {
             launchScreenViewSubviews.removeFirst()
         }
         
