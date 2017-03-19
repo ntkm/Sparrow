@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPRequestPermissionDialogInteractiveDataSource: SPRequestPermissionDialogInteractiveDataSourceInterface {
+open class SPRequestPermissionDialogInteractiveDataSource: NSObject, SPRequestPermissionDialogInteractiveDataSourceInterface {
     
     open func iconForNormalPermissionControl(_ permission: SPRequestPermissionType) -> UIImage {
         var iconBezierPath = UIBezierPath()
