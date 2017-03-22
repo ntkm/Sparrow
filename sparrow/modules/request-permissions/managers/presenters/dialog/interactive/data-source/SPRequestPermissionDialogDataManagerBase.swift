@@ -21,9 +21,9 @@
 
 import UIKit
 
-open class SPRequestPermissionDialogInteractiveDataSource: NSObject, SPRequestPermissionDialogInteractiveDataSourceInterface {
+open class SPRequestPermissionDialogInteractiveDataSource: SPRequestPermissionDialogInteractiveDataSourceInterface {
     
-    open func iconForNormalPermissionControl(_ permission: SPRequestPermissionType) -> UIImage {
+    public func iconForNormalPermissionControl(_ permission: SPRequestPermissionType) -> UIImage {
         var iconBezierPath = UIBezierPath()
         let requestWidth: CGFloat = 100
         switch permission {
@@ -44,14 +44,14 @@ open class SPRequestPermissionDialogInteractiveDataSource: NSObject, SPRequestPe
         return iconBezierPath.convertToImage(fill: true, stroke: false, color: UIColor.black)
     }
     
-    open func iconForAllowedPermissionControl(_ permission: SPRequestPermissionType) -> UIImage {
+    public func iconForAllowedPermissionControl(_ permission: SPRequestPermissionType) -> UIImage {
         let requestWidth: CGFloat = 100
         let checkedBezierPath  = SPBezierPathFigure.icons.checked()
         checkedBezierPath.resizeTo(width: requestWidth)
         return checkedBezierPath.convertToImage(fill: true, stroke: false, color: UIColor.black)
     }
     
-    open func titleForPermissionControl(_ permission: SPRequestPermissionType) -> String {
+    public func titleForPermissionControl(_ permission: SPRequestPermissionType) -> String {
         var title = String()
         switch permission {
         case .Camera:
@@ -70,44 +70,42 @@ open class SPRequestPermissionDialogInteractiveDataSource: NSObject, SPRequestPe
         return title
     }
     
-    open func headerBackgroundView() -> UIView {
+    public func headerBackgroundView() -> UIView {
         let patternView = SPRequestPermissionData.views.patternView()
         let gradientView = SPGradientWithPictureView.init()
-        gradientView.setGradient(
-            from: SPRequestPermissionData.colors.gradient.dark.lightColor(),
-            to: SPRequestPermissionData.colors.gradient.dark.darkColor(),
-            startPoint: CGPoint.init(x: 0.5, y: 0),
-            endPoint: CGPoint.init(x: 0.5, y: 1)
-        )
+        gradientView.startColor = SPRequestPermissionData.colors.gradient.dark.lightColor()
+        gradientView.endColor = SPRequestPermissionData.colors.gradient.dark.darkColor()
+        gradientView.startColorPoint = CGPoint.init(x: 0.5, y: 0)
+        gradientView.endColorPoint = CGPoint.init(x: 0.5, y: 1)
         gradientView.pictureView = patternView
         return gradientView
     }
     
-    open func headerTitle() -> String {
+    public func headerTitle() -> String {
         return SPRequestPermissionData.texts.title()
     }
     
-    open func headerSubtitle() -> String {
+    public func headerSubtitle() -> String {
         return SPRequestPermissionData.texts.subtitile()
     }
     
-    open func topAdviceTitle() -> String {
+    public func topAdviceTitle() -> String {
         return SPRequestPermissionData.texts.advice()
     }
     
-    open func bottomAdviceTitle() -> String {
+    public func bottomAdviceTitle() -> String {
         return SPRequestPermissionData.texts.advice_additional()
     }
     
-    open func underDialogAdviceTitle() -> String {
+    public func underDialogAdviceTitle() -> String {
         return SPRequestPermissionData.texts.swipe_for_hide()
     }
     
-    open func mainColor() -> UIColor {
+    public func mainColor() -> UIColor {
         return UIColor.init(hex: "#27AEE8")
     }
     
-    open func secondColor() -> UIColor {
+    public func secondColor() -> UIColor {
         return UIColor.white
     }
 }
