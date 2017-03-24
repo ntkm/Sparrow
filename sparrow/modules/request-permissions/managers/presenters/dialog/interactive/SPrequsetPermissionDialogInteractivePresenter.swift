@@ -94,6 +94,7 @@ class SPRequestPermissionDialogInteractivePresenter: SPRequestPermissionPresente
                             }
                         })
                     } else {
+                        control.setSelectedState(animated: true)
                         let denidedPermission = self.assistantDelegate!.denidedPermission()
                         if denidedPermission.count == 1 {
                             if denidedPermission[0] == SPRequestPermissionType.Notification {
