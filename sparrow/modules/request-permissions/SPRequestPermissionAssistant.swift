@@ -33,6 +33,16 @@ public class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface
     init(with permissions: [SPRequestPermissionType], permissionManager: SPPermissionManagerInterface, presenterManager: SPRequestPermissionPresenterInterface) {
         self.permissions = permissions
         self.permissions.removeDuplicates()
+        
+        // remove base Location, if used Location with background mode
+        if self.permissions.contains(.LocationWithBackground) {
+            if self.permissions.contains(.Location) {
+                if let index = self.permissions.index(of: .Location) {
+                    self.permissions.remove(at: index)
+                }
+            }
+        }
+        
         self.permissionManager = permissionManager
         self.presenterManager = presenterManager
         self.presenterManager.assistantDelegate = self
