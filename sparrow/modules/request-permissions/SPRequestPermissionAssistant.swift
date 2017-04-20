@@ -35,18 +35,27 @@ public class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface
         self.permissions.removeDuplicates()
         
         // remove base Location, if used Location with background mode
-        if self.permissions.contains(.LocationWithBackground) {
-            if self.permissions.contains(.Location) {
-                if let index = self.permissions.index(of: .Location) {
+        var locationPermissions: [SPRequestPermissionType] = []
+        for permission in self.permissions {
+            if (permission == .LocationWhenInUse || permission == .LocationAlways || permission == .LocationWithBackground) {
+                locationPermissions.append(permission)
+            }
+        }
+        
+        if locationPermissions.count > 1 {
+            print("SPRequestPermissionAssistant: you use more then one permission for Location. It replaced with LocationWithBackground. Plese, set onde Location Permission")
+            for permission in locationPermissions {
+                if let index = self.permissions.index(of: permission) {
                     self.permissions.remove(at: index)
                 }
             }
+            self.permissions.append(SPRequestPermissionType.LocationWithBackground)
         }
         
         self.permissionManager = permissionManager
         self.presenterManager = presenterManager
         self.presenterManager.assistantDelegate = self
-        self.presenterManager.set(permissions: permissions)
+        self.presenterManager.set(permissions: self.permissions)
     }
     
     public func present(on viewController: UIViewController) {

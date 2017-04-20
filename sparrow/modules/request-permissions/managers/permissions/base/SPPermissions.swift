@@ -155,16 +155,33 @@ class SPCalendarPermission: SPPermissionInterface {
 class SPLocationPermission: SPPermissionInterface {
     
     func isAuthorized() -> Bool {
+        
         let status = CLLocationManager.authorizationStatus()
-        if status == .authorizedAlways {
-            return true
+        
+        if withBackground {
+            if status == .authorizedAlways {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            if always {
+                if status == .authorizedAlways {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                if status == .authorizedWhenInUse {
+                    return true
+                } else {
+                    return false
+                }
+            }
         }
-        if status == .authorizedWhenInUse {
-            return true
-        }
-        return false
     }
     
+    var always: Bool = true
     var withBackground: Bool = false
     
     func request(withComlectionHandler complectionHandler: @escaping ()->()?) {
@@ -183,16 +200,31 @@ class SPLocationPermission: SPPermissionInterface {
             }
         } else {
             
-            if SPRequestPermissionLocationHandler.shared == nil {
-                SPRequestPermissionLocationHandler.shared = SPRequestPermissionLocationHandler()
-            }
-            
-            SPRequestPermissionLocationHandler.shared!.requestPermission { (authorized) in
-                DispatchQueue.main.async {
-                    complectionHandler()
-                    SPRequestPermissionLocationHandler.shared = nil
+            if self.always {
+                print("ALWAYS REQ")
+                if SPRequestPermissionAlwaysAuthorizationLocationHandler.shared == nil {
+                    SPRequestPermissionAlwaysAuthorizationLocationHandler.shared = SPRequestPermissionAlwaysAuthorizationLocationHandler()
                 }
-            }
+                
+                SPRequestPermissionAlwaysAuthorizationLocationHandler.shared!.requestPermission { (authorized) in
+                    DispatchQueue.main.async {
+                        complectionHandler()
+                        SPRequestPermissionAlwaysAuthorizationLocationHandler.shared = nil
+                    }
+                }
+            } else {
+                print("NOT ALWAYS REQ")
+                if SPRequestPermissionWhenInUseAuthorizationLocationHandler.shared == nil {
+                    SPRequestPermissionWhenInUseAuthorizationLocationHandler.shared = SPRequestPermissionWhenInUseAuthorizationLocationHandler()
+                }
+                
+                SPRequestPermissionWhenInUseAuthorizationLocationHandler.shared!.requestPermission { (authorized) in
+                    DispatchQueue.main.async {
+                        complectionHandler()
+                        SPRequestPermissionWhenInUseAuthorizationLocationHandler.shared = nil
+                    }
+                }
+            }  
         }
     }
 }
