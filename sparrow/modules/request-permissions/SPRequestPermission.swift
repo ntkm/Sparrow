@@ -37,6 +37,8 @@ public struct SPRequestPermission {
         }
         return true
     }
+    
+    private init() {}
 }
 
 //MARK: - Modules
@@ -53,17 +55,25 @@ extension SPRequestPermission {
                 delegate: SPRequestPermissionEventsDelegate? = nil) {
                 
                 let presenter = SPRequestPermissionDialogInteractivePresenter.init(with: permissions, dataSource: dataSource)
+                presenter.eventsDelegate = delegate
                 let controller = SPRequestPermissionDialogInteractiveViewController.init(presenter: presenter)
                 controller.present(on: viewController)
 
             }
+            
+            private init() {}
         }
+        
+        private init() {}
     }
     
     public struct native {
         
-        static public func present(on viewController: UIViewController, with permissions: [SPRequestPermissionType], delegate: SPRequestPermissionEventsDelegate? = nil) {
-
+        static public func present(with permissions: [SPRequestPermissionType], delegate: SPRequestPermissionEventsDelegate? = nil) {
+            let presenter = SPRequestPermissionNativePresenter.init(with: permissions)
+            presenter.eventsDelegate = delegate
+            presenter.requestPermissions()
+            
         }
     }
     

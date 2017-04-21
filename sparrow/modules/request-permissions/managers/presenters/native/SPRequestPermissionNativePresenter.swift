@@ -21,19 +21,33 @@
 
 import UIKit
 
-public protocol SPRequestPermissionDialogInteractiveViewControllerInterface: class {
+class SPRequestPermissionNativePresenter {
     
-    var presenter: SPRequestPermissionDialogInteractivePresenterDelegate {get set}
+    var eventsDelegate: SPRequestPermissionEventsDelegate?
     
-    func hide()
+    private var permissions: [SPRequestPermissionType] = []
+    private var permissionManager: SPPermissionsManagerInterface = SPPermissionsManager()
     
-    func addControl(_ control: SPRequestPermissionTwiceControlInterface)
+    //MARK: - init
+    init(with permissions: [SPRequestPermissionType]) {
+        self.permissions = permissions
+    }
     
-    //MARK: setting data source
-    func setHeaderBackgroundView(_ view: UIView)
-    func setHeaderTitle(_ title: String)
-    func setHeaderSubtitle(_ title: String)
-    func setTopTitle(_ title: String)
-    func setBottomTitle(_ title: String)
-    func setUnderDialogTitle(_ title: String)
+    func requestPermissions() {
+        for permission in self.permissions {
+            self.eventsDelegate?.didSelectedPermission(permission: permission)
+            self.permissionManager.requestPermission(permission, with: {
+                if self.permissionManager.isAuthorizedPermission(permission) {
+                    self.eventsDelegate?.didAllowPermission(permission: permission)
+                } else {
+                    self.eventsDelegate?.didDeniedPermission(permission: permission)
+                }
+                
+                if self.permissions.last == permission {
+                    self.eventsDelegate?.didHide()
+                }
+            })
+        }
+    }
+
 }
