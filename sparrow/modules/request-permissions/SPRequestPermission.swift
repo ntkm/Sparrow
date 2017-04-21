@@ -22,7 +22,7 @@
 import UIKit
 
 //MARK: - Interface
-struct SPRequestPermission {
+public struct SPRequestPermission {
     
     static public func isAllowPermission(_ permission: SPRequestPermissionType) -> Bool {
         let permissionManager = SPPermissionsManager.init()
@@ -42,11 +42,11 @@ struct SPRequestPermission {
 //MARK: - Modules
 extension SPRequestPermission {
     
-    struct dialog {
+    public struct dialog {
         
-        struct interactive {
+        public struct interactive {
             
-            static func present(
+            static public func present(
                 on viewController: UIViewController,
                 with permissions: [SPRequestPermissionType],
                 dataSource: SPRequestPermissionDialogInteractiveDataSourceInterface = SPRequestPermissionDialogInteractiveDataSource(),
@@ -60,9 +60,9 @@ extension SPRequestPermission {
         }
     }
     
-    struct native {
+    public struct native {
         
-        static func present(on viewController: UIViewController, with permissions: [SPRequestPermissionType], delegate: SPRequestPermissionEventsDelegate? = nil) {
+        static public func present(on viewController: UIViewController, with permissions: [SPRequestPermissionType], delegate: SPRequestPermissionEventsDelegate? = nil) {
 
         }
     }
