@@ -75,6 +75,8 @@ extension SPRequestPermission {
             presenter.requestPermissions()
             
         }
+        
+        private init() {}
     }
     
     private init() {}
