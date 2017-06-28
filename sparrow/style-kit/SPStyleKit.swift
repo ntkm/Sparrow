@@ -21,25 +21,11 @@
 
 import UIKit
 
-public class SPStatusBarManagerViewController: UIViewController {
+public struct SPStyleKit {
     
-    override public var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    override public var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
-    
-    public var isHiddenStatusBar: Bool = false {
-        didSet {
-            UIView.animate(withDuration: 0.3) { () -> Void in
-                self.setNeedsStatusBarAppearanceUpdate()
-            }
-        }
-    }
-    
-    override public var prefersStatusBarHidden: Bool {
-        return isHiddenStatusBar
+    private init() {}
+ 
+    public static func baseColor() -> UIColor {
+        return UIColor.init(hex: "#27AEE8")
     }
 }

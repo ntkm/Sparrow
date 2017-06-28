@@ -21,25 +21,34 @@
 
 import UIKit
 
-public class SPStatusBarManagerViewController: UIViewController {
+struct SPHideWindow {
     
-    override public var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+    private init() {}
+}
+
+extension SPHideWindow {
     
-    override public var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
-    
-    public var isHiddenStatusBar: Bool = false {
-        didSet {
-            UIView.animate(withDuration: 0.3) { () -> Void in
-                self.setNeedsStatusBarAppearanceUpdate()
-            }
+    struct dialog {
+        
+        static let duration: TimeInterval = 0.6
+        static let backgroundGrade: CGFloat = 0.25
+        static let backgroundBlurFactor: CGFloat = 0.017
+        
+        static func presentWith(view: SPGradeWithBlurView) {
+            
+            SPAnimation.animate(self.duration, animations: {
+                let blurRadius = min(view.frame.width, view.frame.width) * self.backgroundBlurFactor
+                view.setGradeAlpha(self.backgroundGrade, blurRaius: blurRadius)
+            })
         }
-    }
-    
-    override public var prefersStatusBarHidden: Bool {
-        return isHiddenStatusBar
+        
+        static func hideWith(view: SPGradeWithBlurView) {
+            
+            SPAnimation.animate(self.duration, animations: {
+                view.setGradeAlpha(0, blurRaius: 0)
+            })
+        }
+        
+        private init() {}
     }
 }

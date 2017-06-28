@@ -21,25 +21,19 @@
 
 import UIKit
 
-public class SPStatusBarManagerViewController: UIViewController {
+public protocol SPRateAppBannerWithIndicatorDataSourceInterface: class {
     
-    override public var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+    func titleFirstStageOnAlert() -> String
+    func titleButtonFirstStage() -> String
+    func titleFirstStageOnList() -> String
     
-    override public var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
+    func titleSecondStageOnAlert() -> String
+    func titleButtonSecondStage() -> String
+    func titleSecondStageOnList() -> String
     
-    public var isHiddenStatusBar: Bool = false {
-        didSet {
-            UIView.animate(withDuration: 0.3) { () -> Void in
-                self.setNeedsStatusBarAppearanceUpdate()
-            }
-        }
-    }
-    
-    override public var prefersStatusBarHidden: Bool {
-        return isHiddenStatusBar
-    }
+    func bottomAdviceTitle() -> String
+
+    //colorize
+    func mainColor() -> UIColor
+    func secondColor() -> UIColor
 }

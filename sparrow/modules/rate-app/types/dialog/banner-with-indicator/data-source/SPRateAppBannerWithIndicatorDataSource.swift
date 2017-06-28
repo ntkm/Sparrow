@@ -21,25 +21,41 @@
 
 import UIKit
 
-public class SPStatusBarManagerViewController: UIViewController {
-    
-    override public var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+open class SPRateAppBannerWithIndicatorDataSource: NSObject, SPRateAppBannerWithIndicatorDataSourceInterface {
+
+    public func titleFirstStageOnAlert() -> String {
+        return "You are enjoy with app?"
     }
     
-    override public var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
+    public func titleButtonFirstStage() -> String {
+        return "Enjoy"
     }
     
-    public var isHiddenStatusBar: Bool = false {
-        didSet {
-            UIView.animate(withDuration: 0.3) { () -> Void in
-                self.setNeedsStatusBarAppearanceUpdate()
-            }
-        }
+    public func titleFirstStageOnList() -> String {
+        return "You are enjoy with app"
     }
     
-    override public var prefersStatusBarHidden: Bool {
-        return isHiddenStatusBar
+    public func titleSecondStageOnAlert() -> String {
+        return "Rate App in AppStore?"
+    }
+    
+    public func titleButtonSecondStage() -> String {
+        return "Rate"
+    }
+    
+    public func titleSecondStageOnList() -> String {
+        return "You want rate app in AppStore"
+    }
+
+    public func bottomAdviceTitle() -> String {
+        return "Swipe to hide"
+    }
+    
+    public func mainColor() -> UIColor {
+        return SPStyleKit.baseColor()
+    }
+    
+    public func secondColor() -> UIColor {
+        return UIColor.white
     }
 }

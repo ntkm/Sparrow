@@ -19,27 +19,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import UIKit
+import Foundation
 
-public class SPStatusBarManagerViewController: UIViewController {
-    
-    override public var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    override public var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
-    
-    public var isHiddenStatusBar: Bool = false {
-        didSet {
-            UIView.animate(withDuration: 0.3) { () -> Void in
-                self.setNeedsStatusBarAppearanceUpdate()
-            }
-        }
-    }
-    
-    override public var prefersStatusBarHidden: Bool {
-        return isHiddenStatusBar
-    }
+struct SPShadow {
+
+    private init() {}
 }
