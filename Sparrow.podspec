@@ -31,6 +31,11 @@ Pod::Spec.new do |s|
       request_permission.dependency 'Sparrow/Core'
     end
 
+    modules.subspec 'RateApp' do |rate_app|
+      rate_app.name = 'RateApp'
+      rate_app.dependency 'Sparrow/Core'
+    end
+
   end
 
 end
