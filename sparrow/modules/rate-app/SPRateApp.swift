@@ -30,7 +30,7 @@ public struct SPRateApp {
     static fileprivate let daysIntervalKey: String = "SPRateAppDaysIntervalKey"
     static fileprivate let countPresentedNativeDialogKey: String = "SPRateAppCountPresentedNativeDialogKey"
     
-    static func isShowDialog() -> Bool {
+    static public func isShowDialog() -> Bool {
         let dateUnwrap = UserDefaults.standard.object(forKey: self.expireDateKey)
         if let date = dateUnwrap as? Date {
             if date < Date.init(timeIntervalSinceNow: 0) {
@@ -71,7 +71,7 @@ public struct SPRateApp {
         }
     }
     
-    static func setBaseTimeInterval() {
+    static public func setBaseTimeInterval() {
         UserDefaults.standard.set(3, forKey: self.daysIntervalKey)
 
         let dateUnwrap = UserDefaults.standard.object(forKey: self.expireDateKey)
@@ -81,7 +81,7 @@ public struct SPRateApp {
         }
     }
     
-    static func setTimeInterval(days: Int) {
+    static public func setTimeInterval(days: Int) {
         UserDefaults.standard.set(days, forKey: self.daysIntervalKey)
         
         let dateUnwrap = UserDefaults.standard.object(forKey: self.expireDateKey)
@@ -102,7 +102,7 @@ public struct SPRateApp {
         UserDefaults.standard.set(expireDate, forKey: self.expireDateKey)
     }
     
-    static func openPageInAppStore(id: String) {
+    static public func openPageInAppStore(id: String) {
         let appID = id
         
         if let checkURL = URL(string: "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(appID)&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8") {
@@ -116,7 +116,7 @@ public struct SPRateApp {
         }
     }
     
-    static func rateApp(id: String) {
+    static public func rateApp(id: String) {
         if SPRateApp.isAvailableNativeDialog() {
             if #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
