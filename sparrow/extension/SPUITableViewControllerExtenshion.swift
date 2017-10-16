@@ -21,31 +21,14 @@
 
 import UIKit
 
-public class SPParallaxTableViewController: UITableViewController {
+extension UITableViewController {
     
-    private var cellHeight: CGFloat = 240
-
-    override public func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    // MARK: - Table view data source
-    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        fatalError("need emplementation in subclass")
-    }
-    
-    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        fatalError("need emplementation in subclass")
-    }
-    
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.cellHeight
-    }
-    
-    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        tableView.visibleCells.forEach { cell in
-            let parallaxCell = cell as! SPParallaxTableViewCell
-            parallaxCell.parallaxOffset(self.tableView)
-        }
+    func refreshManually() {
+        self.refreshControl?.beginRefreshing()
+        self.tableView.setContentOffset(
+            CGPoint.init(
+                x: 0,
+                y: self.tableView.contentOffset.y - (self.refreshControl?.frame.size.height  ?? 0)
+        ), animated: true)
     }
 }

@@ -21,31 +21,26 @@
 
 import UIKit
 
-public class SPParallaxTableViewController: UITableViewController {
+struct SPDownloader {
     
-    private var cellHeight: CGFloat = 240
-
-    override public func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    // MARK: - Table view data source
-    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        fatalError("need emplementation in subclass")
-    }
-    
-    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        fatalError("need emplementation in subclass")
-    }
-    
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.cellHeight
-    }
-    
-    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        tableView.visibleCells.forEach { cell in
-            let parallaxCell = cell as! SPParallaxTableViewCell
-            parallaxCell.parallaxOffset(self.tableView)
+    static func downloadedFrom(link: String, withComplection complection: @escaping (UIImage?) -> () = {_ in }) {
+        guard let url = URL(string: link) else {
+            complection(nil)
+            return
         }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else {
+                    complection(nil)
+                    return
+            }
+            complection(image)
+            }.resume()
     }
 }
+
+

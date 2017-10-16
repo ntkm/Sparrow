@@ -21,55 +21,22 @@
 
 import UIKit
 
-public class SPRoundButton: SPRoundFrameButton {
+public class SPTableViewCell<ContentView: UIView>: UITableViewCell {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.commonInit()
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.commonInit()
-    }
-    
-    
-    private func commonInit() {
-        self.backgroundColor = UIColor.white
-        self.layer.borderWidth = 0
-    }
-}
+    let view = ContentView.init()
 
-public class SPRoundLineButton: SPRoundFrameButton {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.commonInit()
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.commonInit()
-    }
-    
-    
-    private func commonInit() {
+    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.clear
-        self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor(hue: 0,
-                                         saturation: 0,
-                                         brightness: 100,
-                                         alpha: 0.5).cgColor
-        self.layer.borderColor = UIColor.init(white: 1, alpha: 0.5).cgColor
+        self.addSubview(view)
     }
-}
-
-public class SPRoundFrameButton: UIButton {
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override public func layoutSubviews() {
         super.layoutSubviews()
-        let minSide = min(self.frame.width, self.frame.height)
-        self.layer.cornerRadius = minSide / 2
-        self.clipsToBounds = true
+        self.view.setEqualsFrameFromBounds(self)
     }
 }
