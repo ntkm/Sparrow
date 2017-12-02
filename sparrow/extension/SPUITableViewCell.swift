@@ -21,23 +21,10 @@
 
 import UIKit
 
-struct SPDeviceOrientation {
+extension UITableViewCell {
     
-    static var isPortraitOrienation: Bool {
-        var isPortraitOrientation = true
-        if UIDevice.current.orientation.isValidInterfaceOrientation {
-            if UIDevice.current.orientation.isPortrait {
-                isPortraitOrientation = true
-            } else {
-                isPortraitOrientation = false
-            }
-        } else {
-            if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
-                isPortraitOrientation = true
-            } else {
-                isPortraitOrientation = false
-            }
-        }
-        return isPortraitOrientation
+    public func highlighted() {
+        self.setHighlighted(true, animated: false)
+        self.setHighlighted(false, animated: true)
     }
 }

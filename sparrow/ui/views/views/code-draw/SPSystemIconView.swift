@@ -19,11 +19,49 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import UIKit
 
-@objc protocol SPSegmentControlCellStyleDelegate {
+class SPSystemIconView: UIView {
     
-    @objc optional func selectedState(segmentControlCell: SPSegmentedControlCell, forIndex index: Int)
+    var type: SPSystemIconType {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
     
-    @objc optional func normalState(segmentControlCell: SPSegmentedControlCell,  forIndex index: Int)
+    var color = SPNativeStyleKit.Colors.blue {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    init() {
+        self.type = .share
+        super.init(frame: CGRect.zero)
+        self.commonInit()
+    }
+    
+    init(type: SPSystemIconType) {
+        self.type = type
+        super.init(frame: CGRect.zero)
+        self.commonInit()
+    }
+    
+    private func commonInit() {
+        self.backgroundColor = UIColor.clear
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        switch type {
+        case .share:
+            SPCodeDraw.SystemIconPack.drawShare(frame: rect, resizing: .aspectFit, color: self.color)
+            break
+        }
+    }
 }
+

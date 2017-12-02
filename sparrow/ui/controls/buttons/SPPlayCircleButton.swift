@@ -21,65 +21,57 @@
 
 import UIKit
 
-class SPAppStoreActionButton: UIButton {
+class SPPlayCircleButton: UIButton {
     
-    var style: Style = .base {
+    var audioState: AudioState = AudioState.play {
         didSet {
-            
-            self.setTitleColorForNoramlAndHightlightedStates(color: self.baseColor)
-            
-            switch self.style {
-            case .base:
-                self.backgroundColor = self.secondColor
-                self.titleLabel?.font = UIFont.system(type: .Bold, size: 14)
+            switch self.audioState {
+            case .play:
+                self.iconView.type = .play
                 break
-            case .main:
-                self.backgroundColor = self.baseColor
-                self.layer.borderWidth = 0
-                self.setTitleColorForNoramlAndHightlightedStates(color: UIColor.white)
-                self.titleLabel?.font = UIFont.system(type: .Bold, size: 14)
+            case .pause:
+                self.iconView.type = .pause
                 break
-            case .line:
-                self.backgroundColor = UIColor.clear
-                self.layer.borderWidth = 1
-                self.layer.borderColor = self.baseColor.cgColor
-                self.titleLabel?.font = UIFont.system(type: .Medium, size: 14)
+            case .stop:
+                self.iconView.type = .stop
                 break
             }
         }
     }
     
-    var baseColor: UIColor = UIColor.init(hex: "0076FF")
-    var secondColor: UIColor = UIColor.init(hex: "F0F1F6")
+    var iconColor = SPNativeStyleKit.Colors.white {
+        didSet {
+            self.iconView.color = self.iconColor
+        }
+    }
+    
+    let iconView = SPAudioIconView.init()
     
     init() {
         super.init(frame: CGRect.zero)
-        self.commonInit()
+        self.addSubview(self.iconView)
+        self.iconView.isUserInteractionEnabled = false
+        self.setTitle("", for: .normal)
+        self.backgroundColor = SPNativeStyleKit.Colors.blue
+        self.audioState = .play
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.commonInit()
-    }
-    
-    private func commonInit() {
-        self.style = .base
-        self.layer.masksToBounds = true
-        self.contentEdgeInsets = UIEdgeInsetsMake(6, 15, 6, 15)
-    }
-    
-    override func setTitle(_ title: String?, for state: UIControlState) {
-        super.setTitle(title?.uppercased(), for: state)
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        self.iconView.setEqualsFrameFromBounds(self, withWidthFactor: 0.45, withHeightFactor: 0.45, withCentering: true)
         self.rounded()
     }
     
-    enum Style {
-        case base
-        case main
-        case line
+    enum AudioState {
+        case play
+        case pause
+        case stop
     }
+    
+    
 }
+

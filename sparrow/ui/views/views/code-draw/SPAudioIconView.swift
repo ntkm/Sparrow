@@ -21,34 +21,58 @@
 
 import UIKit
 
-public class SPParallaxTableViewCell: UITableViewCell {
+class SPAudioIconView: UIView {
     
-    var parallaxViews = [UIView]()
-    var parallaxSize: CGFloat = 100
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+    var type: IconType {
+        didSet {
+            self.setNeedsDisplay()
+        }
     }
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        commonInit()
+    var color = SPNativeStyleKit.Colors.white {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    init() {
+        self.type = .play
+        super.init(frame: CGRect.zero)
+        self.commonInit()
+    }
+    
+    init(type: IconType) {
+        self.type = type
+        super.init(frame: CGRect.zero)
+        self.commonInit()
     }
     
     private func commonInit() {
-        layer.masksToBounds = true
-        self.selectionStyle = .none
+        self.backgroundColor = UIColor.clear
     }
     
-    func parallaxOffset(_ tableView: UITableView) {
-        //place in parallax-position
-        var deltaY = (frame.origin.y + frame.height/2) - tableView.contentOffset.y
-        deltaY = min(tableView.bounds.height, max(deltaY, 0))
-        var move : CGFloat = (deltaY / tableView.bounds.height) * self.parallaxSize
-        move = move / 2.0  - move
-        for view in self.parallaxViews {
-            view.frame.origin.y = move
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        switch type {
+        case .play:
+            SPCodeDraw.AudioIconPack.drawPlay(frame: rect, resizing: .aspectFit, fillColor: self.color)
+            break
+        case .pause:
+            SPCodeDraw.AudioIconPack.drawPause(frame: rect, resizing: .aspectFit, fillColor: self.color)
+            break
+        case .stop:
+            SPCodeDraw.AudioIconPack.drawStop(frame: rect, resizing: .aspectFit, fillColor: self.color)
+            break
         }
+    }
+    
+    enum IconType {
+        case play
+        case pause
+        case stop
     }
 }

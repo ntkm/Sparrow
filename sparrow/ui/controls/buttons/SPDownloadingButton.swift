@@ -21,22 +21,37 @@
 
 import UIKit
 
-struct SPAlert {
+class SPDownloadingButton: UIButton {
     
-    static func showAlert(title: String, message: String, buttonTitle: String, complection: @escaping ()->() = {}, on viewController: UIViewController) {
-        let ac = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        
-        ac.addAction(UIAlertAction.init(
-            title: buttonTitle,
-            style: UIAlertActionStyle.default,
-            handler: { (action) in
-                complection()
-        }))
-        
-        viewController.present(ac, animated: true, completion: nil)
+    let activityIndicatorView = UIActivityIndicatorView.init()
+    
+    func setLoadingMode() {
+        self.activityIndicatorView.alpha = 0
+        self.activityIndicatorView.isHidden = false
+        self.activityIndicatorView.startAnimating()
+        self.activityIndicatorView.color = self.titleLabel?.textColor
+        self.addSubview(self.activityIndicatorView)
+        self.hideContent(completion: {
+            SPAnimation.animate(0.2, animations: {
+                self.activityIndicatorView.alpha = 1
+            })
+        })
+    }
+    
+    func unsetLoadingMode() {
+        SPAnimation.animate(0.2, animations: {
+            self.activityIndicatorView.alpha = 0
+        }, withComplection: {
+            self.activityIndicatorView.removeFromSuperview()
+            self.activityIndicatorView.isHidden = true
+            self.activityIndicatorView.stopAnimating()
+            self.showContent()
+        })
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.activityIndicatorView.center = CGPoint.init(x: self.frame.width / 2, y: self.frame.height / 2)
     }
 }
+

@@ -21,23 +21,13 @@
 
 import UIKit
 
-struct SPDeviceOrientation {
+public extension UIDevice {
     
-    static var isPortraitOrienation: Bool {
-        var isPortraitOrientation = true
-        if UIDevice.current.orientation.isValidInterfaceOrientation {
-            if UIDevice.current.orientation.isPortrait {
-                isPortraitOrientation = true
-            } else {
-                isPortraitOrientation = false
-            }
-        } else {
-            if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
-                isPortraitOrientation = true
-            } else {
-                isPortraitOrientation = false
-            }
-        }
-        return isPortraitOrientation
+    public func isIphone() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .phone
+    }
+    
+    public func isIpad() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
     }
 }

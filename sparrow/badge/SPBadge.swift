@@ -23,7 +23,13 @@ import UIKit
 
 public struct SPBadge {
     
-    static func resetCount() {
+    static func reset() {
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
+    
+    static func set(count: Int) {
+        UIApplication.shared.applicationIconBadgeNumber = count
+    }
+    
+    private init() {}
 }

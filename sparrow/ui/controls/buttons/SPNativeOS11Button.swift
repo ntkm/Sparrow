@@ -21,36 +21,44 @@
 
 import UIKit
 
-@available(iOS, unavailable)
-public class SPPageItemsScalingCollectionView: UICollectionView {
+class SPNativeOS11Button: UIButton {
     
-    //var layout = SPPageItemsScalingCollectionLayout()
-    var layout = SPCollectionViewLayout.init()
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+    override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted {
+                self.backgroundColor = self.backgroundColor?.withAlphaComponent(0.7)
+            } else {
+                self.backgroundColor = self.backgroundColor?.withAlphaComponent(1)
+            }
+        }
     }
-    
-    init(frame: CGRect) {
-        super.init(frame: frame, collectionViewLayout: self.layout)
-        commonInit()
-    }
-    
+
     init() {
-        super.init(frame: CGRect.zero, collectionViewLayout: self.layout)
-        commonInit()
+        super.init(frame: CGRect.zero)
+        self.commonInit()
     }
     
-    fileprivate func commonInit() {
-        self.backgroundColor = UIColor.clear
-        self.collectionViewLayout = self.layout
-        self.decelerationRate = UIScrollViewDecelerationRateFast
-        self.delaysContentTouches = false
-        self.isPagingEnabled = false
-        self.showsHorizontalScrollIndicator = false
-        self.showsVerticalScrollIndicator = false
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit()
+    }
+    
+    private func commonInit() {
+        self.titleLabel?.font = UIFont.system(type: UIFont.BoldType.DemiBold, size: 16)
+        self.setTitleColorForNoramlAndHightlightedStates(color: UIColor.white)
+        self.backgroundColor = SPNativeStyleKit.Colors.blue
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = 8
+        self.contentEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
+    }
+    
+    override func sizeToFit() {
+        super.sizeToFit()
+        if let superview = self.superview {
+            var width = superview.frame.width - 40
+            width.setIfMore(when: 335)
+            self.setWidth(width)
+        }
     }
 }
-
 

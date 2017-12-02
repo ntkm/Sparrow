@@ -21,26 +21,34 @@
 
 import UIKit
 
-public class SPIconsButton: SPRoundFrameButton {
+class SPFormBottomTextTableViewCell: UITableViewCell {
     
-    init(normalIconImage: UIImage?, highlightedIconImage: UIImage?) {
-        super.init(frame: CGRect.zero)
-        commonInit(normalIconImage, highlightedIconImage: highlightedIconImage)
-    }
+    let label = UILabel.init()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
     
-    fileprivate func commonInit(_ normalIconImage: UIImage? = nil, highlightedIconImage: UIImage? = nil) {
+    private func commonInit() {
         self.backgroundColor = UIColor.clear
-        self.setImage(normalIconImage, for: UIControlState.normal)
-        self.setImage(highlightedIconImage, for: UIControlState.highlighted)
+        self.label.text = "Label"
+        self.label.numberOfLines = 0
+        self.label.font = UIFont.system(type: .Regular, size: 13)
+        self.label.textColor = UIColor.init(hex: "6D6D72")
+        self.contentView.addSubview(self.label)
+        
+        let marginGuide = contentView.layoutMarginsGuide
+        
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+        self.label.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor).isActive = true
+        self.label.topAnchor.constraint(equalTo: marginGuide.topAnchor, constant: 2).isActive = true
+        self.label.bottomAnchor.constraint(lessThanOrEqualTo: marginGuide.bottomAnchor, constant: 0).isActive = true
+        self.label.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor).isActive = true
     }
 }

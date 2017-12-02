@@ -69,6 +69,24 @@ extension UIButton {
         })
     }
     
+    func hideContent(completion: (() -> Void)! = {}) {
+        SPAnimation.animate(0.2,
+                            animations: {
+                                self.titleLabel?.alpha = 0
+        }, withComplection: {
+             completion()
+        })
+    }
+    
+    func showContent(completion: (() -> Void)! = {}) {
+        SPAnimation.animate(0.2,
+                            animations: {
+                                self.titleLabel?.alpha = 1
+        }, withComplection: {
+            completion()
+        })
+    }
+    
     func setTitleColorForNoramlAndHightlightedStates(color: UIColor) {
         self.setTitleColor(color, for: .normal)
         self.setTitleColor(color.withAlphaComponent(0.7), for: .highlighted)

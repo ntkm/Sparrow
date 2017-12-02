@@ -21,7 +21,22 @@
 
 import UIKit
 
-@objc protocol SPSegmentControlDelegate {
+extension UIAlertController {
     
-    @objc optional func indicatorViewRelativPosition(position: CGFloat, onSegmentControl segmentControl: SPSegmentedControl)
+    static func show(title: String, message: String, buttonTitle: String, complection: @escaping ()->() = {}, on viewController: UIViewController) {
+        let ac = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        ac.addAction(UIAlertAction.init(
+            title: buttonTitle,
+            style: UIAlertActionStyle.default,
+            handler: { (action) in
+                complection()
+        }))
+        
+        viewController.present(ac, animated: true, completion: nil)
+    }
 }

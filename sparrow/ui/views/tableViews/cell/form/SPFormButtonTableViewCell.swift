@@ -21,31 +21,31 @@
 
 import UIKit
 
-public class SPParallaxTableViewController: UITableViewController {
+class SPFormButtonTableViewCell: UITableViewCell {
     
-    private var cellHeight: CGFloat = 240
-
-    override public func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    // MARK: - Table view data source
-    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        fatalError("need emplementation in subclass")
+    let button = SPDownloadingButton()
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.commonInit()
     }
     
-    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        fatalError("need emplementation in subclass")
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit()
     }
     
-    override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.cellHeight
+    private func commonInit() {
+        self.backgroundColor = UIColor.white
+        self.button.setTitle("Button", for: .normal)
+        self.button.setTitleColorForNoramlAndHightlightedStates(color: SPNativeStyleKit.Colors.blue)
+        self.button.titleLabel?.font = UIFont.system(type: .Medium, size: 17)
+        
+        self.contentView.addSubview(self.button)
     }
     
-    override public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        tableView.visibleCells.forEach { cell in
-            let parallaxCell = cell as! SPParallaxTableViewCell
-            parallaxCell.parallaxOffset(self.tableView)
-        }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.button.setEqualsBoundsFromSuperview()
     }
 }

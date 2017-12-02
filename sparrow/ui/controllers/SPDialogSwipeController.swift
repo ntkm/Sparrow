@@ -77,7 +77,7 @@ public class SPDialogSwipeController<DialogView: UIView, BottomView: UIView>: SP
         }
     }
     var dialogCenteringPoint: CGPoint {
-        if SPDeviceOrientation.isPortraitOrienation() {
+        if SPDeviceOrientation.isPortraitOrienation {
             return CGPoint(x: self.view.center.x, y: self.view.center.y * dialogViewPortraitYtranslationFactor)
         } else {
             return CGPoint(x: self.view.center.x, y: self.view.center.y * dialogViewLandscapeYtranslationFactor)

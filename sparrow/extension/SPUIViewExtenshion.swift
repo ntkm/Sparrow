@@ -24,20 +24,24 @@ import UIKit
 // MARK: - layout
 public extension UIView {
     
+    var bootomXPosition: CGFloat {
+        return self.frame.bottomXPosition
+    }
+    
+    var bootomYPosition: CGFloat {
+        return self.frame.bottomYPosition
+    }
+    
+    var minSideSize: CGFloat {
+        return self.frame.minSideSize
+    }
+    
+    var isWidthLessThanHeight: Bool {
+        return self.frame.isWidthLessThanHeight
+    }
+    
     func rounded() {
-        self.layer.cornerRadius = self.minSideSize() / 2
-    }
-    
-    func bootomYPosition() -> CGFloat {
-        return self.frame.origin.y + self.frame.height
-    }
-    
-    func minSideSize() -> CGFloat {
-        return min(self.frame.width, self.frame.height)
-    }
-    
-    func isWidthLessThanHeight() -> Bool {
-        return self.bounds.width < self.bounds.height
+        self.layer.cornerRadius = self.minSideSize / 2
     }
     
     func setHeight(_ height: CGFloat) {
@@ -103,7 +107,7 @@ public extension UIView {
 public extension UIView {
     
     func setParalax(amountFactor: CGFloat) {
-        let amount = self.minSideSize() * amountFactor
+        let amount = self.minSideSize * amountFactor
         self.setParalax(amount: amount)
     }
     
@@ -147,7 +151,7 @@ public extension UIView {
 
 // MARK: - shadow
 extension UIView {
-
+    
     func setShadow(
         xTranslationFactor: CGFloat,
         yTranslationFactor: CGFloat,
@@ -163,14 +167,14 @@ extension UIView {
         let xTranslation = (self.frame.width - shadowWidth) / 2 + (self.frame.width * xTranslationFactor)
         let yTranslation = (self.frame.height - shadowHeight) / 2 + (self.frame.height * yTranslationFactor)
         
-        let cornerRadius = self.minSideSize() * cornerRadiusFactor
+        let cornerRadius = self.minSideSize * cornerRadiusFactor
         
         let shadowPath = UIBezierPath.init(
             roundedRect: CGRect.init(x: xTranslation, y: yTranslation, width: shadowWidth, height: shadowHeight),
             cornerRadius: cornerRadius
         )
         
-        let blurRadius = self.minSideSize() * blurRadiusFactor
+        let blurRadius = self.minSideSize * blurRadiusFactor
         
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOffset = CGSize.zero
@@ -245,4 +249,3 @@ extension UIView {
         })
     }
 }
-

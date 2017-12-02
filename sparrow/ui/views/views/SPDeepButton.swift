@@ -6,7 +6,7 @@ class SPDeepButton: UIButton {
     
     var sideSpace: CGFloat = 20 {
         didSet {
-            self.recalculateSize()
+            self.sizeToFit()
         }
     }
     
@@ -57,9 +57,8 @@ class SPDeepButton: UIButton {
         })
     }
     
-    func recalculateSize() {
-        self.sizeToFit()
-        self.titleLabel?.sizeToFit()
+    override func sizeToFit() {
+        super.sizeToFit()
         self.frame = CGRect.init(
             x: 0, y: 0,
             width: (self.titleLabel?.frame.width ?? 0) + (2 * self.sideSpace),

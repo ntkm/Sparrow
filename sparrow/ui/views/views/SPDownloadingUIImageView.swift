@@ -52,7 +52,7 @@ class SPDownloadingImageView: UIImageView {
     }
     
     func setImage(link: String, with complection: ((UIImage?)->())? = nil) {
-        SPDownloader.downloadedFrom(link: link) { (image) in
+        SPDownloader.downloadImageFrom(link: link) { (image) in
             DispatchQueue.main.async {
                 if let setupImage = image {
                     self.setImage(image: setupImage, animatable: true)

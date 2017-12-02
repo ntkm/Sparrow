@@ -21,23 +21,29 @@
 
 import UIKit
 
-struct SPDeviceOrientation {
+struct SPTelegram {
     
-    static var isPortraitOrienation: Bool {
-        var isPortraitOrientation = true
-        if UIDevice.current.orientation.isValidInterfaceOrientation {
-            if UIDevice.current.orientation.isPortrait {
-                isPortraitOrientation = true
-            } else {
-                isPortraitOrientation = false
-            }
-        } else {
-            if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
-                isPortraitOrientation = true
-            } else {
-                isPortraitOrientation = false
-            }
+    static func share(text: String) {
+        let urlStringEncoded = text.addingPercentEncoding( withAllowedCharacters: .urlHostAllowed)
+        let url  = NSURL(string: "tg://msg?text=\(urlStringEncoded!)")
+        let tgURL:NSURL? = url
+        if UIApplication.shared.canOpenURL(URL(string: "tg://msg?text=test")!) {
+            UIApplication.shared.openURL(tgURL! as URL )
         }
-        return isPortraitOrientation
     }
+    
+    static func isSetApp() -> Bool {
+        if UIApplication.shared.canOpenURL(URL(string: "tg://msg?text=test")!) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    static func joinChannel(id: String) {
+        let url = "https://t.me/joinchat/\(id)"
+        SPOpener.Link.redirectToBrowserAndOpen(link: url)
+    }
+    
 }
+

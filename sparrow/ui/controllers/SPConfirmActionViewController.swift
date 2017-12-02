@@ -44,11 +44,6 @@ class SPConfirmActionViewController: UIViewController {
         self.view.addSubview(self.navigationBarView)
         self.view.addSubview(self.cellsView)
         self.view.addSubview(self.confirmActionView)
-        
-        /*self.addCell(task: "Task", title: "Title", subtitle: "Big subtitle for description data", imageLink: "https://pp.userapi.com/c638630/v638630705/36c3c/wCaVDYj2_zE.jpg", image: nil)
-         self.addCell(task: "Task", title: "Title", subtitle: "Big subtitle", imageLink: nil, image: nil)
-         self.addCell(task: "Task", title: "Ее Title", subtitle: nil, imageLink: nil, image: nil)*/
-        
         self.updateLayout(size: self.view.frame.size)
     }
     
@@ -156,7 +151,7 @@ class SPConfirmActionViewController: UIViewController {
             self.addSubview(self.label)
             
             self.button.setTitle("Сancel", for: .normal)
-            self.button.setTitleColorForNoramlAndHightlightedStates(color: SPNativeStyleKit.blueColor())
+            self.button.setTitleColorForNoramlAndHightlightedStates(color: SPNativeStyleKit.Colors.blue)
             self.button.titleLabel?.font = UIFont.system(type: .DemiBold, size: 16)
             self.addSubview(self.button)
         }
@@ -207,7 +202,7 @@ class SPConfirmActionViewController: UIViewController {
             
             self.taskLabel.text = task.uppercased()
             self.taskLabel.font = UIFont.system(type: .Medium, size: 13)
-            self.taskLabel.textColor = SPNativeStyleKit.grayColor()
+            self.taskLabel.textColor = SPNativeStyleKit.Colors.gray
             self.taskLabel.numberOfLines = 1
             self.taskLabel.textAlignment = .right
             self.addSubview(self.taskLabel)
@@ -223,7 +218,7 @@ class SPConfirmActionViewController: UIViewController {
                 self.subtitleLabel = UILabel.init()
                 self.subtitleLabel?.text = subtitle?.uppercased()
                 self.subtitleLabel?.font = UIFont.system(type: .Medium, size: 13)
-                self.subtitleLabel?.textColor = SPNativeStyleKit.grayColor()
+                self.subtitleLabel?.textColor = SPNativeStyleKit.Colors.gray
                 self.subtitleLabel?.numberOfLines = 0
                 self.subtitleLabel?.textAlignment = .left
                 self.addSubview(self.subtitleLabel!)
@@ -254,8 +249,9 @@ class SPConfirmActionViewController: UIViewController {
                 self.setHeight(75)
             }
             if self.subtitleLabel != nil {
-                print("hh \(self.subtitleLabel!.frame.height))")
-                self.setHeight(45 + self.subtitleLabel!.frame.height)
+                var height = 45 + self.subtitleLabel!.frame.height
+                height.setIfFewer(when: 75)
+                self.setHeight(height)
             }
             self.layoutSubviews()
         }
@@ -351,18 +347,15 @@ class SPConfirmActionViewController: UIViewController {
         
         override func sizeToFit() {
             super.sizeToFit()
-            
-            print("----")
+
             var height: CGFloat = 0
             for view in subviews {
                 if view != self.backgroundView {
                     view.sizeToFit()
                     height += view.frame.height
-                    print(view.frame.height)
                 }
             }
             self.setHeight(height)
-            print("all height: \(height)")
             self.layoutSubviews()
         }
     }
@@ -375,7 +368,7 @@ class SPConfirmActionViewController: UIViewController {
         init() {
             super.init(frame: CGRect.zero)
             self.button.setTitle("Execute", for: .normal)
-            self.button.setTitleColorForNoramlAndHightlightedStates(color: SPNativeStyleKit.blueColor())
+            self.button.setTitleColorForNoramlAndHightlightedStates(color: SPNativeStyleKit.Colors.blue)
             self.button.titleLabel?.font = UIFont.system(type: .DemiBold, size: 16)
             self.addSubview(self.backgroundView)
             self.addSubview(self.button)
@@ -387,7 +380,11 @@ class SPConfirmActionViewController: UIViewController {
         
         override func sizeToFit() {
             super.sizeToFit()
-            self.setHeight(80)
+            var baseHeight: CGFloat = 80
+            if #available(iOS 11.0, *) {
+                baseHeight += (self.superview?.safeAreaInsets.bottom ?? 0)
+            }
+            self.setHeight(baseHeight)
             self.layoutSubviews()
         }
         
@@ -395,7 +392,16 @@ class SPConfirmActionViewController: UIViewController {
             super.layoutSubviews()
             self.backgroundView.setEqualsBoundsFromSuperview()
             self.button.sizeToFit()
-            self.button.setEqualsBoundsFromSuperview()
+            
+            var safeAreaInsetsBottom: CGFloat = 0
+            if #available(iOS 11.0, *) {
+                safeAreaInsetsBottom = (self.superview?.safeAreaInsets.bottom ?? 0)
+            }
+            self.button.frame = CGRect.init(
+                x: 0, y: 0,
+                width: self.frame.width,
+                height: self.frame.height - safeAreaInsetsBottom
+            )
         }
     }
 }

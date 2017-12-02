@@ -23,7 +23,7 @@ import UIKit
 
 struct SPDownloader {
     
-    static func downloadedFrom(link: String, withComplection complection: @escaping (UIImage?) -> () = {_ in }) {
+    static func downloadImageFrom(link: String, withComplection complection: @escaping (UIImage?) -> () = {_ in }) {
         guard let url = URL(string: link) else {
             complection(nil)
             return

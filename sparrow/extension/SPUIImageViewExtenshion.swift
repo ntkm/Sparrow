@@ -2,6 +2,12 @@ import UIKit
 
 extension UIImageView {
     
+    public func setNativeStyle() {
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = SPNativeStyleKit.Colors.midGray.cgColor
+        self.layer.masksToBounds = true
+    }
+    
     public func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit, withComplection complection: @escaping (UIImage?) -> () = {_ in }) {
         DispatchQueue.main.async {
             self.contentMode = mode
