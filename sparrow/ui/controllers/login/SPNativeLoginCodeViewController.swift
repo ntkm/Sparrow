@@ -21,6 +21,7 @@
 
 import UIKit
 
+@available(iOS 9.0, *)
 class SPNativeLoginCodeViewController: UITableViewController {
     
     weak var delegate: SPLoginCodeControllerDelegate?
@@ -180,6 +181,7 @@ class SPNativeLoginCodeViewController: UITableViewController {
     }
 }
 
+@available(iOS 9.0, *)
 extension SPNativeLoginCodeViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -200,6 +202,7 @@ extension SPNativeLoginCodeViewController: UITextFieldDelegate {
     }
 }
 
+@available(iOS 9.0, *)
 protocol SPLoginCodeControllerDelegate: class {
     
     var loginCodeContent: SPNativeLoginNavigationController.LoginCodeContent {get}

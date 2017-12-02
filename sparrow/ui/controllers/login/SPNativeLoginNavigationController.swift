@@ -21,7 +21,8 @@
 
 import UIKit
 
-class SPNativeLoginNavigationController: UINavigationController, SPLoginControllerDelegate, SPLoginCodeControllerDelegate {
+@available(iOS 9.0, *)
+open class SPNativeLoginNavigationController: UINavigationController, SPLoginControllerDelegate, SPLoginCodeControllerDelegate {
     
     let loginViewController = SPNativeLoginViewController()
     let codeViewController = SPNativeLoginCodeViewController()
@@ -30,7 +31,7 @@ class SPNativeLoginNavigationController: UINavigationController, SPLoginControll
         super.init(rootViewController: self.loginViewController)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -38,15 +39,15 @@ class SPNativeLoginNavigationController: UINavigationController, SPLoginControll
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    var loginContent: SPNativeLoginNavigationController.LoginContent {
+    open var loginContent: SPNativeLoginNavigationController.LoginContent {
         return LoginContent()
     }
     
-    var loginCodeContent: SPNativeLoginNavigationController.LoginCodeContent {
+    open var loginCodeContent: SPNativeLoginNavigationController.LoginCodeContent {
         return LoginCodeContent()
     }
-
-    struct LoginContent {
+    
+    public struct LoginContent {
         var navigationTitle: String = "Sign In"
         var loginTitle: String = "Login"
         var loginPlaceholder: String = "example@icloud.com"
@@ -58,9 +59,11 @@ class SPNativeLoginNavigationController: UINavigationController, SPLoginControll
         var errorOauthTitle: String = "Error"
         var errorOauthSubtitle: String = "Invalid login or password"
         var errorOauthButtonTitle: String = "Ok"
+        
+        public init() {}
     }
     
-    struct LoginCodeContent {
+    public struct LoginCodeContent {
         var navigationTitle: String = "Auth Code"
         var codeTitle: String = "Code"
         var codePlaceholder: String = "Required"
@@ -70,13 +73,15 @@ class SPNativeLoginNavigationController: UINavigationController, SPLoginControll
         var errorOauthTitle: String = "Error"
         var errorOauthSubtitle: String = "Invalid data"
         var errorOauthButtonTitle: String = "Ok"
+        
+        public init() {}
     }
     
-    func login(with login: String, password: String, complection: @escaping (SPOauthState) -> ()) {
+    open func login(with login: String, password: String, complection: @escaping (SPOauthState) -> ()) {
         fatalError("SPLoginNavigationController - Need override func")
     }
     
-    func login(with code: String, complection: @escaping (SPOauthState) -> ()) {
+    open func login(with code: String, complection: @escaping (SPOauthState) -> ()) {
         fatalError("SPLoginNavigationController - Need override func")
     }
     

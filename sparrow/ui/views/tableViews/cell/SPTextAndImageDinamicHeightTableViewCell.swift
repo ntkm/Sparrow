@@ -21,6 +21,7 @@
 
 import UIKit
 
+@available(iOS 9.0, *)
 class SPTextAndImageDinamicHeightTableViewCell: UITableViewCell {
     
     let titleLabel = UILabel()
