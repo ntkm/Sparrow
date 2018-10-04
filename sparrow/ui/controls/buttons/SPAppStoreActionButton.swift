@@ -65,10 +65,10 @@ class SPAppStoreActionButton: UIButton {
     private func commonInit() {
         self.style = .base
         self.layer.masksToBounds = true
-        self.contentEdgeInsets = UIEdgeInsetsMake(6, 15, 6, 15)
+        self.contentEdgeInsets = UIEdgeInsets(top: 6, left: 15, bottom: 6, right: 15)
     }
     
-    override func setTitle(_ title: String?, for state: UIControlState) {
+    override func setTitle(_ title: String?, for state: UIControl.State) {
         super.setTitle(title?.uppercased(), for: state)
     }
     

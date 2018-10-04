@@ -2,7 +2,7 @@ import UIKit
 
 class SPHiderViewController: UIViewController {
     
-    let activityIndicatorView = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+    let activityIndicatorView = UIActivityIndicatorView.init(style: UIActivityIndicatorView.Style.white)
     let backgroundView = SPGradeWithBlurView.init()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

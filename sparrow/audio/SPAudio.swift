@@ -22,11 +22,12 @@
 import UIKit
 import AVFoundation
 
+@available(iOS 10.0, *)
 public struct SPAudio {
     
     static func notStopBackgroundMusic() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient, mode: AVAudioSession.Mode.default)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             

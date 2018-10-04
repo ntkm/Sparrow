@@ -32,7 +32,7 @@ extension UIAlertController {
         
         ac.addAction(UIAlertAction.init(
             title: buttonTitle,
-            style: UIAlertActionStyle.default,
+            style: UIAlertAction.Style.default,
             handler: { (action) in
                 complection()
         }))

@@ -49,7 +49,7 @@ class SPNativeOS11Button: UIButton {
         self.backgroundColor = SPNativeStyleKit.Colors.blue
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 8
-        self.contentEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
+        self.contentEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     }
     
     override func sizeToFit() {

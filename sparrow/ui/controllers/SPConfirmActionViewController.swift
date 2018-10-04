@@ -130,7 +130,7 @@ class SPConfirmActionViewController: UIViewController {
         let label: UILabel = UILabel.init()
         let button: UIButton = UIButton.init()
         let separatorView = UIView.init()
-        let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.extraLight))
+        let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.extraLight))
         
         private var leftAndRightSpace: CGFloat {
             return 18
@@ -293,7 +293,7 @@ class SPConfirmActionViewController: UIViewController {
     
     class SPConfirmActionCellsView: UIView {
         
-        let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.extraLight))
+        let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.extraLight))
         
         private var baseSpace: CGFloat = 18
         
@@ -363,7 +363,7 @@ class SPConfirmActionViewController: UIViewController {
     class SPConfirmActionButtonView: UIView {
         
         let button = UIButton.init()
-        let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.extraLight))
+        let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.extraLight))
         
         init() {
             super.init(frame: CGRect.zero)

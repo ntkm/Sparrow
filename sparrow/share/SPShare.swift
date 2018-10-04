@@ -41,7 +41,7 @@ public struct SPShare {
             }
             
             let shareViewController = UIActivityViewController(activityItems: shareData, applicationActivities: nil)
-            shareViewController.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            shareViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
                 if !completed {
                     complection?(false)
                     return

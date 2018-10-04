@@ -27,7 +27,7 @@ class SPTextAndImageDinamicHeightTableViewCell: UITableViewCell {
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
     let iconImageView = SPDownloadingImageView.init()
-    let button = UIButton.init(type: UIButtonType.system)
+    let button = UIButton.init(type: UIButton.ButtonType.system)
     
     var isShowSeparator: Bool = true {
         didSet {
@@ -39,7 +39,7 @@ class SPTextAndImageDinamicHeightTableViewCell: UITableViewCell {
     private let spaceTopAndBottom: CGFloat = 15 / 1.3
     private let spaceBetweenImageAndTitles: CGFloat = 15
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.backgroundColor = UIColor.white
@@ -78,7 +78,7 @@ class SPTextAndImageDinamicHeightTableViewCell: UITableViewCell {
         self.button.setTitle("Action", for: .normal)
         self.button.titleLabel?.font = UIFont.system(type: .DemiBold, size: 14)
         self.button.titleLabel?.numberOfLines = 0
-        self.button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+        self.button.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
         self.button.translatesAutoresizingMaskIntoConstraints = false
         self.button.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor).isActive = true
         self.button.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor).isActive = true
