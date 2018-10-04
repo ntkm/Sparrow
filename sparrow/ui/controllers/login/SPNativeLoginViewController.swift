@@ -47,8 +47,8 @@ class SPNativeLoginViewController: UITableViewController {
         self.tableView.backgroundColor = SPNativeStyleKit.Colors.customGray
         self.tableView.delaysContentTouches = false
         self.tableView.allowsSelection = false
-        self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.tableFooterView = UIView.init()
         
         self.tableView.register(SPFormTextFiledTableViewCell.self, forCellReuseIdentifier: self.textFieldTableViewCellIdentifier)
@@ -99,7 +99,7 @@ class SPNativeLoginViewController: UITableViewController {
         var labelWidth: CGFloat = 0
         for text in [self.content.loginTitle, self.content.passwordTitle] {
             let font = UIFont.system(type: .Regular, size: 17)
-            let fontAttributes = [NSAttributedStringKey.font: font]
+            let fontAttributes = [NSAttributedString.Key.font: font]
             let calculatedSize = NSString.init(string: text).size(withAttributes: fontAttributes)
             labelWidth.setIfFewer(when: calculatedSize.width + 1)
         }
